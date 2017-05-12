@@ -28,7 +28,8 @@ app.run(function($transform) {
 // in order to avoid unwanted routing.
 //
 app.config(function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'home.html', reloadOnSearch: false});
+  $routeProvider.when('/', {templateUrl: 'forms.html', reloadOnSearch: false});
+  $routeProvider.when('/home', {templateUrl: 'home.html', reloadOnSearch: false});
   $routeProvider.when('/scroll', {templateUrl: 'scroll.html', reloadOnSearch: false});
   $routeProvider.when('/toggle', {templateUrl: 'toggle.html', reloadOnSearch: false});
   $routeProvider.when('/tabs', {templateUrl: 'tabs.html', reloadOnSearch: false});

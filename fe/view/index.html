@@ -28,7 +28,7 @@
     >
 
     <!-- Sidebars -->
-    <div ng-include="'sidebar.html'"
+    <div ng-include="'sidebar.html'" ng-show="loggedIn"
             ui-track-as-search-param="true"
             class="sidebar sidebar-left"></div>
 
@@ -43,36 +43,52 @@
 
       <div class="navbar navbar-app navbar-absolute-top">
         <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-          Mobile Angular UI
+          学车这件事儿
         </div>
         <div class="btn-group pull-left">
-          <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
-            <i class="fa fa-bars"></i> Menu
+          <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle" ng-show="loggedIn">
+            <i class="fa fa-bars"></i> 菜单			
           </div>
         </div>
         <div class="btn-group pull-right" ui-yield-to="navbarAction">
+		  <!--
+		  -->
           <div ui-toggle="uiSidebarRight" class="btn sidebar-right-toggle">
-            <i class="fa fa-comment"></i> Chat
+            <i class="fa fa-users"></i> 教练
           </div>
         </div>
       </div>
 
       <div class="navbar navbar-app navbar-absolute-bottom">
+	    <div class="btn-group justified">
+            <a href="#/home" class="btn btn-navbar btn-icon-only"><i class="fa fa-home fa-navbar"></i></a>
+            <a class="btn btn-navbar btn-icon-only" ng-click="logout()" ng-hide="loggedIn"><i class="fa fa-user-plus fa-navbar"></i></a>
+            <a class="btn btn-navbar btn-icon-only" ng-click="logout()" ng-show="loggedIn"><i class="fa fa-sign-out fa-navbar"></i></a>
+        </div>
+		<!--
         <div class="btn-group justified">
           <a href="/docs" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Docs</a>
           <a href="https://github.com/mcasimir/mobile-angular-ui" class="btn btn-navbar"><i class="fa fa-github fa-navbar"></i> Sources</a>
           <a href="https://github.com/mcasimir/mobile-angular-ui/issues" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> Issues</a>
         </div>
+		-->
       </div>
 
       <!-- App Body -->
-      <div class="app-body" ng-class="{loading: loading}">
+      <div class="app-body"> <!-- ng-class="{loading: loading}"-->
+		<!-- 
+		-->
         <div ng-show="loading" class="app-content-loading">
           <i class="fa fa-spinner fa-spin loading-spinner"></i>
         </div>
+		<!--
+		-->
         <div class="app-content">
           <ng-view></ng-view>
         </div>
+		<!--
+		<ng-view class="app-content"></ng-view>
+		-->
       </div>
 
     </div><!-- ~ .app -->

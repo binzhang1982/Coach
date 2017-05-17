@@ -42,6 +42,8 @@ app.config(function($routeProvider) {
   $routeProvider.when('/drag', {templateUrl: 'drag.html', reloadOnSearch: false});
   $routeProvider.when('/drag2', {templateUrl: 'drag2.html', reloadOnSearch: false});
   $routeProvider.when('/carousel', {templateUrl: 'carousel.html', reloadOnSearch: false});
+
+  $routeProvider.when('/adduser', {templateUrl: 'adduser.html', reloadOnSearch: false});
 });
 
 //
@@ -325,6 +327,34 @@ app.controller('MainController', function($rootScope, $scope) {
     {name: 'Ebony Rice', online: false}
   ];
 
+  $scope.sexes = [
+    {id: '1', name: '男'},
+    {id: '2', name: '女'}
+  ];
+
+  $scope.coachs = [
+    {id: '1', name: '杨教练'},
+    {id: '2', name: '张教练'}
+  ];
+
+
+  $scope.examlevels = [
+    {id: 'A1', name: 'A1 大型载客汽车'},
+    {id: 'A2', name: 'A2 重型,中型全挂,半挂汽车列车'},
+    {id: 'A3', name: 'A3 核载10人以上的城市公共汽车'},
+    {id: 'B1', name: 'B1 中型载客汽车'},
+    {id: 'B2', name: 'B2 重型,中型载货汽车等'},
+    {id: 'C1', name: 'C1 小型,微型载客汽车等'},
+    {id: 'C2', name: 'C2 小型,微型自动挡载客汽车等'},
+    {id: 'C3', name: 'C3 低速载货汽车(原四轮农用运输车)'},
+    {id: 'C4', name: 'C4 三轮汽车(原三轮农用运输车)'},
+    {id: 'D', name: 'D 发动机排量大于50ml或者最大设计车速大于50km/h的三轮摩托车'},
+    {id: 'E', name: 'E 发动机排量大于50ml或者最大设计车速大于50km/h的二轮摩托车'},
+    {id: 'F', name: 'F 发动机排量小于等于50ml或者最大设计车速小于等于50km/h的摩托车'},
+    {id: 'M', name: 'M 轮式自行机械车'},
+    {id: 'N', name: 'N 无轨电车'},
+    {id: 'P', name: 'P 有轨电车'}
+  ];
   //
   // 'Forms' screen
   //

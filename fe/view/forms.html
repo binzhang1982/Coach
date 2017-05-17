@@ -4,21 +4,22 @@
 -->
 <div class="scrollable">
  <div class="scrollable-content section">
-   
+
   <form role="form" ng-submit='login()'>
     <fieldset>
       <legend>登陆</legend>
         <div class="form-group has-success has-feedback">
-          <label>邮箱</label>
-          <input type="email"
-                 ng-model="email"
+          <label>手机</label>
+          <input type="tel"
+                 ng-model="telephone"
                  class="form-control"
-                 placeholder="Enter email">
+                 placeholder="Telephone">
         </div>
 
         <div class="form-group">
           <label>密码</label>
-          <input type="password" 
+          <input type="password"
+                 ng-model="password"
                  class="form-control"
                  placeholder="Password">
         </div>
@@ -27,7 +28,7 @@
 		  <a href="">忘记密码</a>
 		  <!--
           <label>Remember Me</label>
-          <ui-switch 
+          <ui-switch
             ng-model="rememberMe"></ui-switch>
 		  -->
         </div>

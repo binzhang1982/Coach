@@ -8,7 +8,7 @@
               </div>
               <div class="media-body">
                   <h5 class="media-heading">{{coach.name}}</h5>
-                  <input ng-model="coach.stars" type="number" class="rating" min=0 max=5 step=1 data-size="lg" >
+                  <div rating score="coach.rating" max="5" class="pull-left" readonly="false"></div>
               </div>
           </a>
 

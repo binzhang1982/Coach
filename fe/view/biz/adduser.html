@@ -4,81 +4,26 @@
 -->
 <div class="scrollable">
   <div class="scrollable-content section">
+    <ui-shared-state id="activeTab" default="1"></ui-shared-state>
 
-    <form role="form" ng-submit='adduser()'>
-      <fieldset>
-        <legend>注册</legend>
-        <div class="form-group has-success has-feedback">
-          <label>手机</label>
-          <input type="tel"
-                 ng-model="telephone"
-                 class="form-control"
-                 placeholder="手机号码">
-        </div>
+    <ul class="nav nav-tabs">
+      <li ui-class="{'active': activeTab == 1}">
+        <a ui-set="{'activeTab': 1}">学员注册</a>
+      </li>
+      <li ui-class="{'active': activeTab == 2}">
+        <a ui-set="{'activeTab': 2}">教练注册</a>
+      </li>
+    </ul>
 
-        <div class="form-group">
-          <label>密码</label>
-          <input type="password"
-                 ng-model="password"
-                 class="form-control"
-                 placeholder="密码">
-        </div>
 
-        <div class="form-group">
-          <label>确认密码</label>
-          <input type="password"
-                 ng-model="repassword"
-                 class="form-control"
-                 placeholder="确认密码">
-        </div>
+    <div ui-if="activeTab == 1" ng-include="'biz/student/register.html'"
+         ui-track-as-search-param="true">
+    </div>
 
-        <div class="form-group">
-          <label>报考级别</label>
-          <select ng-model="selectedExamLevel" class="selectpicker form-control"
-                  ng-options="examlevel.name for examlevel in examlevels track by examlevel.id">
-          </select>
-        </div>
+    <div ui-if="activeTab == 2" ng-include="'biz/coach/register.html'"
+         ui-track-as-search-param="true">
+    </div>
 
-        <div class="form-group">
-          <label>选择教练</label>
-          <select ng-model="selectedCoach" class="selectpicker form-control"
-                  ng-options="coach.name for coach in coachs track by coach.id">
-          </select>
-        </div>
 
-        <div class="form-group">
-          <label>性别</label>
-          <select ng-model="selectedSex" class="selectpicker form-control"
-                  ng-options="sex.name for sex in sexes track by sex.id">
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>姓名</label>
-          <input type="text"
-                 ng-model="name"
-                 class="form-control"
-                 placeholder="姓名">
-        </div>
-
-        <div class="form-group">
-          <label>邮箱</label>
-          <input type="email"
-                 ng-model="email"
-                 class="form-control"
-                 placeholder="Email">
-        </div>
-      </fieldset>
-      <hr>
-
-      <button class="btn btn-primary btn-block">
-        注册
-      </button>
-      <!--
-          <div ui-content-for="navbarAction">
-            <a class="btn" ng-click="login()">Login</a>
-          </div>
-      -->
-    </form>
   </div>
 </div>

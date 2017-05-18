@@ -28,7 +28,7 @@
     >
 
     <!-- Sidebars --> <!--ng-show="loggedIn"-->
-    <div ng-include="'sidebar.html'"
+    <div ng-include="'sidebarLeft.html'"
             ui-track-as-search-param="true"
             class="sidebar sidebar-left"></div>
 
@@ -51,8 +51,8 @@
           </div>
         </div>
         <div class="btn-group pull-right" ui-yield-to="navbarAction">
-          <div ui-toggle="uiSidebarRight" class="btn sidebar-right-toggle" ng-show="loggedIn && !isAdmin"> <!-- -->
-            <i class="fa fa-users"></i> <span ng-hide="isStudent">学员</span><span ng-hide="isCoach">教练</span>
+          <div ui-toggle="uiSidebarRight" class="btn sidebar-right-toggle" ng-show="loggedIn"> <!-- -->
+            <i class="fa fa-users"></i> <span ng-hide="isStudent || isAdmin">学员</span><span ng-hide="isCoach">教练</span>
           </div>
         </div>
       </div>

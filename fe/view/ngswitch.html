@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<small ng-switch on="user.online">
+                      <span ng-switch-when="true">
+                          <span class="label label-success">ONLINE</span>
+                      </span>
+                      <span ng-switch-default>
+                          <span class="label label-default"><i>OFFLINE</i>
+                          </span>
+                      </span>
+</small>
+</body>
+</html>

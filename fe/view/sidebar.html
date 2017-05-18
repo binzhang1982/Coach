@@ -1,18 +1,27 @@
 <div class="scrollable">
-  <h1 class="scrollable-header app-name">我是<span ng-hide="isCoach">学员</span><span ng-show="isCoach">教练</span></h1>
+  <h1 class="scrollable-header app-name" ng-show="loggedIn">
+    我是<span ng-show="isStudent">学员</span><span ng-show="isCoach">教练</span><span ng-show="isAdmin">管理员</span>
+  </h1>
   <div class="scrollable-content">
     <div class="list-group" ui-turn-off="uiSidebarLeft">
-	  <div ng-hide="isCoach">
-	  <!--学员-->
-      <a class="list-group-item" href="#/home">基本信息<i class="fa fa-chevron-right pull-right"></i></a>
-      <a class="list-group-item" href="#/scroll">预约课程<i class="fa fa-chevron-right pull-right"></i></a>
-	  </div>
-	  <div ng-show="isCoach">
-	  <!--教练-->
-      <a class="list-group-item" href="#/tabs">学员管理<i class="fa fa-chevron-right pull-right"></i></a>
-      <a class="list-group-item" href="#/accordion">预约管理<i class="fa fa-chevron-right pull-right"></i></a>
-      <a class="list-group-item" href="#/overlay">排班管理<i class="fa fa-chevron-right pull-right"></i></a>
-	  </div>
+      <div ng-show="isStudent">
+        <!--学员-->
+        <a class="list-group-item" href="#/studinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>
+        <a class="list-group-item" href="#/studorder">我的预约<i class="fa fa-chevron-right pull-right"></i></a>
+      </div>
+
+      <div ng-show="isCoach">
+        <!--教练-->
+        <a class="list-group-item" href="#/coachinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>
+        <a class="list-group-item" href="#/coachschedule">我的排班<i class="fa fa-chevron-right pull-right"></i></a>
+        <a class="list-group-item" href="#/studlist">我的审核<i class="fa fa-chevron-right pull-right"></i></a>
+      </div>
+
+      <div ng-show="isAdmin">
+        <!--管理员-->
+        <a class="list-group-item" href="#/adminconfig">我的配置<i class="fa fa-chevron-right pull-right"></i></a>
+        <a class="list-group-item" href="#/coachlist">我的审核<i class="fa fa-chevron-right pull-right"></i></a>
+      </div>
     </div>
   </div>
 </div>

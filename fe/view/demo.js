@@ -28,14 +28,13 @@ app.run(function($transform) {
 // in order to avoid unwanted routing.
 //
 app.config(function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'forms.html', reloadOnSearch: false});
   $routeProvider.when('/home', {templateUrl: 'home.html', reloadOnSearch: false});
   $routeProvider.when('/scroll', {templateUrl: 'scroll.html', reloadOnSearch: false});
   $routeProvider.when('/toggle', {templateUrl: 'toggle.html', reloadOnSearch: false});
   $routeProvider.when('/tabs', {templateUrl: 'tabs.html', reloadOnSearch: false});
   $routeProvider.when('/accordion', {templateUrl: 'accordion.html', reloadOnSearch: false});
   $routeProvider.when('/overlay', {templateUrl: 'overlay.html', reloadOnSearch: false});
-  $routeProvider.when('/forms', {templateUrl: 'forms.html', reloadOnSearch: false});
+  $routeProvider.when('/forms', {templateUrl: 'biz/login.html', reloadOnSearch: false});
   $routeProvider.when('/dropdown', {templateUrl: 'dropdown.html', reloadOnSearch: false});
   $routeProvider.when('/touch', {templateUrl: 'touch.html', reloadOnSearch: false});
   $routeProvider.when('/swipe', {templateUrl: 'swipe.html', reloadOnSearch: false});
@@ -43,7 +42,18 @@ app.config(function($routeProvider) {
   $routeProvider.when('/drag2', {templateUrl: 'drag2.html', reloadOnSearch: false});
   $routeProvider.when('/carousel', {templateUrl: 'carousel.html', reloadOnSearch: false});
 
-  $routeProvider.when('/adduser', {templateUrl: 'adduser.html', reloadOnSearch: false});
+  $routeProvider.when('/', {templateUrl: 'biz/login.html', reloadOnSearch: true});
+  $routeProvider.when('/adduser', {templateUrl: 'biz/adduser.html', reloadOnSearch: true});
+
+  $routeProvider.when('/studinfo', {templateUrl: 'biz/student/info.html', reloadOnSearch: true});
+  $routeProvider.when('/studorder', {templateUrl: 'biz/student/order.html', reloadOnSearch: true});
+  $routeProvider.when('/studlist', {templateUrl: 'biz/student/list.html', reloadOnSearch: true});
+
+  $routeProvider.when('/coachlist', {templateUrl: 'biz/coach/list.html', reloadOnSearch: true});
+  $routeProvider.when('/coachinfo', {templateUrl: 'biz/coach/info.html', reloadOnSearch: true});
+  $routeProvider.when('/coachschedule', {templateUrl: 'biz/coach/schedule.html', reloadOnSearch: true});
+
+  $routeProvider.when('/adminconfig', {templateUrl: 'biz/admin/config.html', reloadOnSearch: true});
 });
 
 //
@@ -371,10 +381,10 @@ app.controller('MainController', function($rootScope, $scope) {
 
 
 
-  $scope.isCoach = true;
+  $scope.isCoach = false;
   $scope.isStudent = false;
   $scope.isAdmin = false;
-  $scope.loggedIn = true;
+  $scope.loggedIn = false;
   //$scope.loggedIn = false;
 
   $scope.sexes = [
@@ -387,6 +397,10 @@ app.controller('MainController', function($rootScope, $scope) {
     {id: '2', name: '张教练', icon: "", levels: "C2", rating: "4"}
   ];
 
+  $scope.students = [
+    {id: '1', name: '张一', icon: "", levels: "C1"},
+    {id: '2', name: '张二', icon: "", levels: "C2"}
+  ];
 
   $scope.examlevels = [
     {id: 'A1', name: 'A1 大型载客汽车'},

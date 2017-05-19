@@ -4,7 +4,7 @@
     <div class="form-group has-success has-feedback">
       <label>手机</label>
       <input type="tel"
-             ng-model="phonenum"
+             ng-model="student.phonenum"
              class="form-control"
              placeholder="手机号码">
     </div>
@@ -12,7 +12,7 @@
     <div class="form-group">
       <label>密码</label>
       <input type="password"
-             ng-model="password"
+             ng-model="student.password"
              class="form-control"
              placeholder="密码">
     </div>
@@ -20,14 +20,14 @@
     <div class="form-group">
       <label>确认密码</label>
       <input type="password"
-             ng-model="repassword"
+             ng-model="student.repassword"
              class="form-control"
              placeholder="确认密码">
     </div>
 
     <div class="form-group">
       <label>报考级别</label>
-      <select ng-model="selectedExamLevel" class="selectpicker form-control"
+      <select ng-model="student.selectedLevel" class="selectpicker form-control"
               ng-options="examlevel.name for examlevel in examlevels track by examlevel.id">
       </select>
     </div>
@@ -35,7 +35,7 @@
     <div class="form-group">
       <label>选择教练</label>
       <input type="tel"
-             ng-model="coachphonenum"
+             ng-model="student.coachPhonenum"
              class="form-control"
              placeholder="教练手机号码">
       <!--
@@ -47,7 +47,7 @@
 
     <div class="form-group">
       <label>性别</label>
-      <select ng-model="selectedSex" class="selectpicker form-control"
+      <select ng-model="student.selectedSex" class="selectpicker form-control"
               ng-options="sex.name for sex in sexes track by sex.id">
       </select>
     </div>
@@ -55,7 +55,7 @@
     <div class="form-group">
       <label>姓名</label>
       <input type="text"
-             ng-model="name"
+             ng-model="student.name"
              class="form-control"
              placeholder="姓名">
     </div>
@@ -63,7 +63,7 @@
     <div class="form-group">
       <label>邮箱</label>
       <input type="email"
-             ng-model="email"
+             ng-model="student.email"
              class="form-control"
              placeholder="Email">
     </div>

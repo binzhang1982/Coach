@@ -28,32 +28,32 @@ app.run(function($transform) {
 // in order to avoid unwanted routing.
 //
 app.config(function($routeProvider) {
-  $routeProvider.when('/home', {templateUrl: 'home.html', reloadOnSearch: false});
-  $routeProvider.when('/scroll', {templateUrl: 'scroll.html', reloadOnSearch: false});
-  $routeProvider.when('/toggle', {templateUrl: 'toggle.html', reloadOnSearch: false});
-  $routeProvider.when('/tabs', {templateUrl: 'tabs.html', reloadOnSearch: false});
-  $routeProvider.when('/accordion', {templateUrl: 'accordion.html', reloadOnSearch: false});
-  $routeProvider.when('/overlay', {templateUrl: 'overlay.html', reloadOnSearch: false});
-  $routeProvider.when('/forms', {templateUrl: 'biz/login.html', reloadOnSearch: false});
-  $routeProvider.when('/dropdown', {templateUrl: 'dropdown.html', reloadOnSearch: false});
-  $routeProvider.when('/touch', {templateUrl: 'touch.html', reloadOnSearch: false});
-  $routeProvider.when('/swipe', {templateUrl: 'swipe.html', reloadOnSearch: false});
-  $routeProvider.when('/drag', {templateUrl: 'drag.html', reloadOnSearch: false});
-  $routeProvider.when('/drag2', {templateUrl: 'drag2.html', reloadOnSearch: false});
-  $routeProvider.when('/carousel', {templateUrl: 'carousel.html', reloadOnSearch: false});
+  $routeProvider.when('/home', {templateUrl: '../home.html', reloadOnSearch: false});
+  $routeProvider.when('/scroll', {templateUrl: '../scroll.html', reloadOnSearch: false});
+  $routeProvider.when('/toggle', {templateUrl: '../toggle.html', reloadOnSearch: false});
+  $routeProvider.when('/tabs', {templateUrl: '../tabs.html', reloadOnSearch: false});
+  $routeProvider.when('/accordion', {templateUrl: '../accordion.html', reloadOnSearch: false});
+  $routeProvider.when('/overlay', {templateUrl: '../overlay.html', reloadOnSearch: false});
+  $routeProvider.when('/forms', {templateUrl: '../biz/login.html', reloadOnSearch: false});
+  $routeProvider.when('/dropdown', {templateUrl: '../dropdown.html', reloadOnSearch: false});
+  $routeProvider.when('/touch', {templateUrl: '../touch.html', reloadOnSearch: false});
+  $routeProvider.when('/swipe', {templateUrl: '../swipe.html', reloadOnSearch: false});
+  $routeProvider.when('/drag', {templateUrl: '../drag.html', reloadOnSearch: false});
+  $routeProvider.when('/drag2', {templateUrl: '../drag2.html', reloadOnSearch: false});
+  $routeProvider.when('/carousel', {templateUrl: '../carousel.html', reloadOnSearch: false});
 
-  $routeProvider.when('/', {templateUrl: 'biz/login.html', reloadOnSearch: true});
-  $routeProvider.when('/adduser', {templateUrl: 'biz/adduser.html', reloadOnSearch: true});
+  $routeProvider.when('/', {templateUrl: '../view/biz/login.html', reloadOnSearch: true});
+  $routeProvider.when('/adduser', {templateUrl: '../view/biz/adduser.html', reloadOnSearch: true});
 
-  $routeProvider.when('/studinfo', {templateUrl: 'biz/student/info.html', reloadOnSearch: true});
-  $routeProvider.when('/studorder', {templateUrl: 'biz/student/order.html', reloadOnSearch: true});
-  $routeProvider.when('/studlist', {templateUrl: 'biz/student/list.html', reloadOnSearch: true});
+  $routeProvider.when('/studinfo', {templateUrl: '../view/biz/student/info.html', reloadOnSearch: true});
+  $routeProvider.when('/studorder', {templateUrl: '../view/biz/student/order.html', reloadOnSearch: true});
+  $routeProvider.when('/studlist', {templateUrl: '../view/biz/student/list.html', reloadOnSearch: true});
 
-  $routeProvider.when('/coachlist', {templateUrl: 'biz/coach/list.html', reloadOnSearch: true});
-  $routeProvider.when('/coachinfo', {templateUrl: 'biz/coach/info.html', reloadOnSearch: true});
-  $routeProvider.when('/coachschedule', {templateUrl: 'biz/coach/schedule.html', reloadOnSearch: true});
+  $routeProvider.when('/coachlist', {templateUrl: '../view/biz/coach/list.html', reloadOnSearch: true});
+  $routeProvider.when('/coachinfo', {templateUrl: '../view/biz/coach/info.html', reloadOnSearch: true});
+  $routeProvider.when('/coachschedule', {templateUrl: '../view/biz/coach/schedule.html', reloadOnSearch: true});
 
-  $routeProvider.when('/adminconfig', {templateUrl: 'biz/admin/config.html', reloadOnSearch: true});
+  $routeProvider.when('/adminconfig', {templateUrl: '../view/biz/admin/config.html', reloadOnSearch: true});
 });
 
 //
@@ -378,9 +378,24 @@ app.controller('MainController', function($rootScope, $scope) {
     alert('Congrats you scrolled to the end of the list!');
   };
 
+  //
+  // 'Drag' screen
+  //
+  $scope.notices = [];
+
+  for (var j = 0; j < 10; j++) {
+    $scope.notices.push({icon: 'envelope', message: 'Notice ' + (j + 1)});
+  }
+
+  $scope.deleteNotice = function(notice) {
+    var index = $scope.notices.indexOf(notice);
+    if (index > -1) {
+      $scope.notices.splice(index, 1);
+    }
+  };
 
 
-
+  // new
   $scope.isCoach = false;
   $scope.isStudent = false;
   $scope.isAdmin = false;
@@ -425,23 +440,13 @@ app.controller('MainController', function($rootScope, $scope) {
   $scope.rememberMe = true;
   $scope.email = 'me@example.com';
 
+  $scope.addstudent = function() {
+    alert('You added a student');
+  };
+
   $scope.login = function() {
     alert('You submitted the login form');
   };
 
-  //
-  // 'Drag' screen
-  //
-  $scope.notices = [];
 
-  for (var j = 0; j < 10; j++) {
-    $scope.notices.push({icon: 'envelope', message: 'Notice ' + (j + 1)});
-  }
-
-  $scope.deleteNotice = function(notice) {
-    var index = $scope.notices.indexOf(notice);
-    if (index > -1) {
-      $scope.notices.splice(index, 1);
-    }
-  };
 });

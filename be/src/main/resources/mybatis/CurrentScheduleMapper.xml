@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zbin.coachtalk.busi.mapper.CurrentScheduleMapper" >
+  <resultMap id="BaseResultMap" type="com.zbin.coachtalk.busi.entity.CurrentSchedule" >
+    <id column="coach_phonenum" property="coachPhonenum" jdbcType="CHAR" />
+    <id column="workday" property="workday" jdbcType="DATE" />
+    <id column="midday_id" property="middayId" jdbcType="SMALLINT" />
+    <result column="work_flag" property="workFlag" jdbcType="SMALLINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    coach_phonenum, workday, midday_id, work_flag, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zbin.coachtalk.busi.entity.CurrentScheduleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from talk.currentschedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zbin.coachtalk.busi.entity.CurrentScheduleKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from talk.currentschedule
+    where coach_phonenum = #{coachPhonenum,jdbcType=CHAR}
+      and workday = #{workday,jdbcType=DATE}
+      and midday_id = #{middayId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zbin.coachtalk.busi.entity.CurrentScheduleKey" >
+    delete from talk.currentschedule
+    where coach_phonenum = #{coachPhonenum,jdbcType=CHAR}
+      and workday = #{workday,jdbcType=DATE}
+      and midday_id = #{middayId,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zbin.coachtalk.busi.entity.CurrentScheduleExample" >
+    delete from talk.currentschedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zbin.coachtalk.busi.entity.CurrentSchedule" >
+    insert into talk.currentschedule (coach_phonenum, workday, midday_id, 
+      work_flag, update_time)
+    values (#{coachPhonenum,jdbcType=CHAR}, #{workday,jdbcType=DATE}, #{middayId,jdbcType=SMALLINT}, 
+      #{workFlag,jdbcType=SMALLINT}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zbin.coachtalk.busi.entity.CurrentSchedule" >
+    insert into talk.currentschedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coachPhonenum != null" >
+        coach_phonenum,
+      </if>
+      <if test="workday != null" >
+        workday,
+      </if>
+      <if test="middayId != null" >
+        midday_id,
+      </if>
+      <if test="workFlag != null" >
+        work_flag,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coachPhonenum != null" >
+        #{coachPhonenum,jdbcType=CHAR},
+      </if>
+      <if test="workday != null" >
+        #{workday,jdbcType=DATE},
+      </if>
+      <if test="middayId != null" >
+        #{middayId,jdbcType=SMALLINT},
+      </if>
+      <if test="workFlag != null" >
+        #{workFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zbin.coachtalk.busi.entity.CurrentScheduleExample" resultType="java.lang.Integer" >
+    select count(*) from talk.currentschedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update talk.currentschedule
+    <set >
+      <if test="record.coachPhonenum != null" >
+        coach_phonenum = #{record.coachPhonenum,jdbcType=CHAR},
+      </if>
+      <if test="record.workday != null" >
+        workday = #{record.workday,jdbcType=DATE},
+      </if>
+      <if test="record.middayId != null" >
+        midday_id = #{record.middayId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.workFlag != null" >
+        work_flag = #{record.workFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update talk.currentschedule
+    set coach_phonenum = #{record.coachPhonenum,jdbcType=CHAR},
+      workday = #{record.workday,jdbcType=DATE},
+      midday_id = #{record.middayId,jdbcType=SMALLINT},
+      work_flag = #{record.workFlag,jdbcType=SMALLINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zbin.coachtalk.busi.entity.CurrentSchedule" >
+    update talk.currentschedule
+    <set >
+      <if test="workFlag != null" >
+        work_flag = #{workFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where coach_phonenum = #{coachPhonenum,jdbcType=CHAR}
+      and workday = #{workday,jdbcType=DATE}
+      and midday_id = #{middayId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zbin.coachtalk.busi.entity.CurrentSchedule" >
+    update talk.currentschedule
+    set work_flag = #{workFlag,jdbcType=SMALLINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where coach_phonenum = #{coachPhonenum,jdbcType=CHAR}
+      and workday = #{workday,jdbcType=DATE}
+      and midday_id = #{middayId,jdbcType=SMALLINT}
+  </update>
+</mapper>

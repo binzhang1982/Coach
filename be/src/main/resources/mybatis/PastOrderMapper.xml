@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zbin.coachtalk.busi.mapper.PastOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zbin.coachtalk.busi.entity.PastOrder" >
+    <result column="student_phonenum" property="studentPhonenum" jdbcType="CHAR" />
+    <result column="coach_phonenum" property="coachPhonenum" jdbcType="CHAR" />
+    <result column="workday" property="workday" jdbcType="DATE" />
+    <result column="midday_id" property="middayId" jdbcType="SMALLINT" />
+    <result column="order_flag" property="orderFlag" jdbcType="SMALLINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    student_phonenum, coach_phonenum, workday, midday_id, order_flag, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zbin.coachtalk.busi.entity.PastOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from talk.pastorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zbin.coachtalk.busi.entity.PastOrderExample" >
+    delete from talk.pastorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zbin.coachtalk.busi.entity.PastOrder" >
+    insert into talk.pastorder (student_phonenum, coach_phonenum, workday, 
+      midday_id, order_flag, update_time
+      )
+    values (#{studentPhonenum,jdbcType=CHAR}, #{coachPhonenum,jdbcType=CHAR}, #{workday,jdbcType=DATE}, 
+      #{middayId,jdbcType=SMALLINT}, #{orderFlag,jdbcType=SMALLINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zbin.coachtalk.busi.entity.PastOrder" >
+    insert into talk.pastorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentPhonenum != null" >
+        student_phonenum,
+      </if>
+      <if test="coachPhonenum != null" >
+        coach_phonenum,
+      </if>
+      <if test="workday != null" >
+        workday,
+      </if>
+      <if test="middayId != null" >
+        midday_id,
+      </if>
+      <if test="orderFlag != null" >
+        order_flag,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentPhonenum != null" >
+        #{studentPhonenum,jdbcType=CHAR},
+      </if>
+      <if test="coachPhonenum != null" >
+        #{coachPhonenum,jdbcType=CHAR},
+      </if>
+      <if test="workday != null" >
+        #{workday,jdbcType=DATE},
+      </if>
+      <if test="middayId != null" >
+        #{middayId,jdbcType=SMALLINT},
+      </if>
+      <if test="orderFlag != null" >
+        #{orderFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zbin.coachtalk.busi.entity.PastOrderExample" resultType="java.lang.Integer" >
+    select count(*) from talk.pastorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update talk.pastorder
+    <set >
+      <if test="record.studentPhonenum != null" >
+        student_phonenum = #{record.studentPhonenum,jdbcType=CHAR},
+      </if>
+      <if test="record.coachPhonenum != null" >
+        coach_phonenum = #{record.coachPhonenum,jdbcType=CHAR},
+      </if>
+      <if test="record.workday != null" >
+        workday = #{record.workday,jdbcType=DATE},
+      </if>
+      <if test="record.middayId != null" >
+        midday_id = #{record.middayId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.orderFlag != null" >
+        order_flag = #{record.orderFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update talk.pastorder
+    set student_phonenum = #{record.studentPhonenum,jdbcType=CHAR},
+      coach_phonenum = #{record.coachPhonenum,jdbcType=CHAR},
+      workday = #{record.workday,jdbcType=DATE},
+      midday_id = #{record.middayId,jdbcType=SMALLINT},
+      order_flag = #{record.orderFlag,jdbcType=SMALLINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

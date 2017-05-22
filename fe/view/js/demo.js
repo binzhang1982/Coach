@@ -462,21 +462,24 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
     }
   };
 
-  //
-  // 'Forms' screen
-  //
-  // new
+  // 控制menu选项
   $scope.isCoach = false;
   $scope.isStudent = false;
   $scope.isAdmin = false;
   $scope.loggedIn = false;
   $scope.token;
-  //$scope.loggedIn = false;
+  $scope.$on('changeLoginInfo', function(e,data){
+    console.log(data);
+    $scope.isCoach = data.isCoach;
+    $scope.isStudent = data.isStudent;
+    $scope.isAdmin = data.isAdmin;
+    $scope.loggedIn = data.loggedIn;
+    $scope.token = data.token;
+  });
 
+  //选项值
   $scope.sexes = [];
   $scope.examlevels = [];
-  $scope.coachs = [];
-  $scope.students = [];
   $scope.loadSexParams = function() {
     netRequest.getParams(1).then(function (res) {
       if (res != null) {
@@ -504,4 +507,6 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
   $scope.loadSexParams();
   $scope.loadLevelParams();
 
+  $scope.coachs = [];
+  $scope.students = [];
 }]);

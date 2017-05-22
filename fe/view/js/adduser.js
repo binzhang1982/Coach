@@ -13,12 +13,14 @@ app.controller('AddUserController', ['$rootScope', '$scope', '$location', 'netRe
       if (res != null) {
         $scope.student.password = '';
         $scope.student.repassword = '';
-        $scope.$parent.$parent.token = res;
         $location.path("/studinfo");
-        $scope.$parent.$parent.loggedIn = true;
-        $scope.$parent.$parent.isCoach = false;
-        $scope.$parent.$parent.isStudent = true;
-        $scope.$parent.$parent.isAdmin = false;
+        $scope.$emit("changeLoginInfo", {
+          "isCoach" : false,
+          "isStudent" : true,
+          "isAdmin" : false,
+          "loggedIn" : true,
+          "token" : res
+        });
       }
     }, function (res) {
       alert(res);
@@ -33,12 +35,14 @@ app.controller('AddUserController', ['$rootScope', '$scope', '$location', 'netRe
       if (res != null) {
         $scope.coach.password = '';
         $scope.coach.repassword = '';
-        $scope.$parent.$parent.token = res;
         $location.path("/coachinfo");
-        $scope.$parent.$parent.loggedIn = true;
-        $scope.$parent.$parent.isCoach = true;
-        $scope.$parent.$parent.isStudent = false;
-        $scope.$parent.$parent.isAdmin = false;
+        $scope.$emit("changeLoginInfo", {
+          "isCoach" : true,
+          "isStudent" : false,
+          "isAdmin" : false,
+          "loggedIn" : true,
+          "token" : res
+        });
       }
     }, function (res) {
       alert(res);

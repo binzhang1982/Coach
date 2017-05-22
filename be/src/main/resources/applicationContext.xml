@@ -10,9 +10,9 @@
 
 	<beans:import resource="applicationContext-resources.xml"/>
 	<!-- 
+	-->
 	<beans:import resource="spring-job.xml"></beans:import>
 	<beans:import resource="scheduler-factory.xml"></beans:import>
-	-->
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
 	<!-- Enables the Spring MVC @Controller programming model -->

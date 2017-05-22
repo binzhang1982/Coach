@@ -3,26 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-<!--	
-	<bean id="ddTalkDeptUpdaterJob"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="vendorInfoService"/>
-		<property name="targetMethod" value="updateSupProjectGroupInfo"/>
-	</bean>
-
-	<bean name="ddTalkDeptUpdaterTrigger"
-		class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail">
-			<ref bean="ddTalkDeptUpdaterJob" />
-		</property>
-		<property name="cronExpression">
-			<value>* 0/1 * * * ? </value>
-		</property>
-	</bean>
--->
 	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="vendorInfoService" />
-		<property name="targetMethod" value="updateSupProjectGroupInfo" />
+		<property name="targetObject" ref="coachScheduleService" />
+		<property name="targetMethod" value="createSchedule" />
 	</bean>
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="jobDetail" />

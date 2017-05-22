@@ -470,56 +470,13 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
   $scope.isStudent = false;
   $scope.isAdmin = false;
   $scope.loggedIn = false;
+  $scope.token;
   //$scope.loggedIn = false;
 
   $scope.sexes = [];
   $scope.examlevels = [];
   $scope.coachs = [];
   $scope.students = [];
-
-  $scope.token;
-  $scope.student = {};
-  $scope.coach = {};
-
-  $scope.addstudent = function() {
-    $scope.student.levelId = $scope.student.selectedLevel.id;
-    $scope.student.sexId = $scope.student.selectedSex.id;
-
-    netRequest.saveStudent($scope.student).then(function (res) {
-      if (res != null) {
-        $scope.student.password = '';
-        $scope.student.repassword = '';
-        $location.path("/studinfo");
-        $scope.loggedIn = true;
-        $scope.isCoach = false;
-        $scope.isStudent = true;
-        $scope.isAdmin = false;
-      }
-    }, function (res) {
-      alert(res);
-    });
-  };
-
-  $scope.addcoach = function() {
-    $scope.coach.levelId = $scope.coach.selectedLevel.id;
-    $scope.coach.sexId = $scope.coach.selectedSex.id;
-
-    netRequest.saveCoach($scope.coach).then(function (res) {
-      if (res != null) {
-        $scope.coach.password = '';
-        $scope.coach.repassword = '';
-        $scope.token = res;
-        $location.path("/coachinfo");
-        $scope.loggedIn = true;
-        $scope.isCoach = true;
-        $scope.isStudent = false;
-        $scope.isAdmin = false;
-      }
-    }, function (res) {
-      alert(res);
-    });
-  };
-
   $scope.loadSexParams = function() {
     netRequest.getParams(1).then(function (res) {
       if (res != null) {

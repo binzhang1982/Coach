@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zbin.coachtalk.busi.entity.CoachInfo;
+import com.zbin.coachtalk.busi.entity.LoginStatus;
 import com.zbin.coachtalk.busi.mapper.CoachInfoMapper;
 import com.zbin.coachtalk.busi.mapper.StudentInfoMapper;
 import com.zbin.coachtalk.busi.service.CoachInfoService;
@@ -26,7 +27,7 @@ public class CoachInfoServiceImpl implements CoachInfoService {
     public CoachInfoMapper coachInfoMapper;
 
 	@Override
-	public String insertCoach(CoachInfo coach) {
+	public LoginStatus insertCoach(CoachInfo coach) {
 		coach.setAccessTime(new Date());
 
 		// 学员电话是否在学员表/教练表存在，存在报错
@@ -44,6 +45,13 @@ public class CoachInfoServiceImpl implements CoachInfoService {
 		params.put("phonenum", coach.getPhonenum());
 		params.put("password", coach.getPassword());
 		params.put("access", coach.getAccessTime());
-		return SecurityUtil.authentication(params);
+		
+		LoginStatus status = new LoginStatus();
+		status.setIsAdmin(false);
+		status.setIsCoach(true);
+		status.setIsStudent(false);
+		status.setLoggedIn(true);
+		status.setToken(SecurityUtil.authentication(params));
+		return status;
 	}
 }

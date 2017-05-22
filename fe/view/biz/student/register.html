@@ -28,7 +28,7 @@
     <div class="form-group">
       <label>报考级别</label>
       <select ng-model="student.selectedLevel" class="selectpicker form-control"
-              ng-options="examlevel.name for examlevel in examlevels track by examlevel.id">
+              ng-options="examlevel.value for examlevel in examlevels track by examlevel.id">
       </select>
     </div>
 
@@ -48,7 +48,7 @@
     <div class="form-group">
       <label>性别</label>
       <select ng-model="student.selectedSex" class="selectpicker form-control"
-              ng-options="sex.name for sex in sexes track by sex.id">
+              ng-options="sex.value for sex in sexes track by sex.id">
       </select>
     </div>
 
@@ -65,7 +65,7 @@
       <input type="email"
              ng-model="student.email"
              class="form-control"
-             placeholder="Email">
+             placeholder="me@example.com">
     </div>
   </fieldset>
   <hr>

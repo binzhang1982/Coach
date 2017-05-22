@@ -338,14 +338,18 @@ app.directive("rating", function() {
 
 app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $http, Url, $rootScope) {
   function handleResponse(promise) {
+    $rootScope.loading = true;
     return promise.then(function (res) {
-      if (res.data.status == "ok")
+      if (res.data.status == "ok") {
+        $rootScope.loading = false;
         return $q.resolve(res.data.data);
-      else if (res.data.status == "error" && res.data.data == "10000")
-        $.alert("没有当前操作权限!");
-      else
+      }
+      else {
+        $rootScope.loading = false;
         return $q.reject(res.data.message);
+      }
     }, function (res) {
+      $rootScope.loading = false;
       return $q.reject("服务器请求异常");
     });
   }
@@ -354,9 +358,32 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
   var timeout = 10000000;
   var service = {};
 
+  service.getParams = function (groupkey) {
+    var url = Url.getParams + "?groupkey=" + groupkey;
+
+    var promise = $http.get(url,{timeout: timeout});
+    return handleResponse(promise);
+  };
+
   service.saveStudent = function (student) {
-    var url = Url.saveStudent + "?token=" + $rootScope.token;
+    var url;
+    if ($rootScope.token) {
+      url = Url.saveStudent + "?token=" + $rootScope.token;
+    } else {
+      url = Url.saveStudent;
+    }
     var promise = $http.post(url, student, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  service.saveCoach = function (coach) {
+    var url;
+    if ($rootScope.token) {
+      url = Url.saveCoach + "?token=" + $rootScope.token;
+    } else {
+      url = Url.saveCoach;
+    }
+    var promise = $http.post(url, coach, {timeout: timeout});
     return handleResponse(promise);
   }
 
@@ -367,10 +394,12 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
     var host ="http://localhost:8080";
     var path="/coach-talk/api";
     return {
-      //获取服务清单列表
-      //getServiceList: host + path + "/custserv/servlist/{managingId}",
-      //保存学生
-      saveStudent: host + path + "/student/save_student"
+      //取选项配置值
+      getParams: host + path + "/param/list",
+      //保存学员
+      saveStudent: host + path + "/student/save_student",
+      //保存教练
+      saveCoach: host + path + "/coach/save_coach"
     };
   }]);
 
@@ -379,7 +408,7 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
 // For this trivial demo we have just a unique MainController
 // for everything
 //
-app.controller('MainController', ['$rootScope', '$scope', 'netRequest', function($rootScope, $scope, netRequest) {
+app.controller('MainController', ['$rootScope', '$scope', '$location', 'netRequest', function($rootScope, $scope, $location, netRequest) {
 
   $scope.swiped = function(direction) {
     alert('Swiped ' + direction);
@@ -433,7 +462,9 @@ app.controller('MainController', ['$rootScope', '$scope', 'netRequest', function
     }
   };
 
-
+  //
+  // 'Forms' screen
+  //
   // new
   $scope.isCoach = false;
   $scope.isStudent = false;
@@ -441,43 +472,14 @@ app.controller('MainController', ['$rootScope', '$scope', 'netRequest', function
   $scope.loggedIn = false;
   //$scope.loggedIn = false;
 
-  $scope.sexes = [
-    {id: '1', name: '男'},
-    {id: '2', name: '女'}
-  ];
+  $scope.sexes = [];
+  $scope.examlevels = [];
+  $scope.coachs = [];
+  $scope.students = [];
 
-  $scope.coachs = [
-    {id: '1', name: '杨教练', icon: "", levels: "C1", rating: "5"},
-    {id: '2', name: '张教练', icon: "", levels: "C2", rating: "4"}
-  ];
-
-  $scope.students = [
-    {id: '1', name: '张一', icon: "", levels: "C1"},
-    {id: '2', name: '张二', icon: "", levels: "C2"}
-  ];
-
-  $scope.examlevels = [
-    {id: '1', name: 'A1 大型载客汽车'},
-    {id: '2', name: 'A2 重型,中型全挂,半挂汽车列车'},
-    {id: '3', name: 'A3 核载10人以上的城市公共汽车'},
-    {id: '4', name: 'B1 中型载客汽车'},
-    {id: '5', name: 'B2 重型,中型载货汽车等'},
-    {id: '6', name: 'C1 小型,微型载客汽车等'},
-    {id: '7', name: 'C2 小型,微型自动挡载客汽车等'},
-    {id: '8', name: 'C3 低速载货汽车(原四轮农用运输车)'},
-    {id: '9', name: 'C4 三轮汽车(原三轮农用运输车)'},
-    {id: '10', name: 'D 发动机排量大于50ml或者最大设计车速大于50km/h的三轮摩托车'},
-    {id: '11', name: 'E 发动机排量大于50ml或者最大设计车速大于50km/h的二轮摩托车'},
-    {id: '12', name: 'F 发动机排量小于等于50ml或者最大设计车速小于等于50km/h的摩托车'},
-    {id: '13', name: 'M 轮式自行机械车'},
-    {id: '14', name: 'N 无轨电车'},
-    {id: '15', name: 'P 有轨电车'}
-  ];
-  //
-  // 'Forms' screen
-  //
-  $scope.email = 'me@example.com';
+  $scope.token;
   $scope.student = {};
+  $scope.coach = {};
 
   $scope.addstudent = function() {
     $scope.student.levelId = $scope.student.selectedLevel.id;
@@ -487,6 +489,51 @@ app.controller('MainController', ['$rootScope', '$scope', 'netRequest', function
       if (res != null) {
         $scope.student.password = '';
         $scope.student.repassword = '';
+        $location.path("/studinfo");
+        $scope.loggedIn = true;
+        $scope.isCoach = false;
+        $scope.isStudent = true;
+        $scope.isAdmin = false;
+      }
+    }, function (res) {
+      alert(res);
+    });
+  };
+
+  $scope.addcoach = function() {
+    $scope.coach.levelId = $scope.coach.selectedLevel.id;
+    $scope.coach.sexId = $scope.coach.selectedSex.id;
+
+    netRequest.saveCoach($scope.coach).then(function (res) {
+      if (res != null) {
+        $scope.coach.password = '';
+        $scope.coach.repassword = '';
+        $scope.token = res;
+        $location.path("/coachinfo");
+        $scope.loggedIn = true;
+        $scope.isCoach = true;
+        $scope.isStudent = false;
+        $scope.isAdmin = false;
+      }
+    }, function (res) {
+      alert(res);
+    });
+  };
+
+  $scope.loadSexParams = function() {
+    netRequest.getParams(1).then(function (res) {
+      if (res != null) {
+        $scope.sexes = res;
+      }
+    }, function (res) {
+      alert(res);
+    });
+  };
+
+  $scope.loadLevelParams = function() {
+    netRequest.getParams(2).then(function (res) {
+      if (res != null) {
+        $scope.examlevels = res;
       }
     }, function (res) {
       alert(res);
@@ -497,5 +544,7 @@ app.controller('MainController', ['$rootScope', '$scope', 'netRequest', function
     alert('You submitted the login form');
   };
 
+  $scope.loadSexParams();
+  $scope.loadLevelParams();
 
 }]);

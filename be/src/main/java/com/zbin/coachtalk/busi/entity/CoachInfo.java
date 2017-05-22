@@ -25,6 +25,10 @@ public class CoachInfo {
 
     private Date accessTime;
 
+    private Short isadmin;
+
+    private Short isapprovaled;
+
     public String getPhonenum() {
         return phonenum;
     }
@@ -111,5 +115,21 @@ public class CoachInfo {
 
     public void setAccessTime(Date accessTime) {
         this.accessTime = accessTime;
+    }
+
+    public Short getIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(Short isadmin) {
+        this.isadmin = isadmin;
+    }
+
+    public Short getIsapprovaled() {
+        return isapprovaled;
+    }
+
+    public void setIsapprovaled(Short isapprovaled) {
+        this.isapprovaled = isapprovaled;
     }
 }

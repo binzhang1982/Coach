@@ -53,8 +53,6 @@ public class StudentServiceImpl implements StudentService {
 		params.put("access", student.getAccessTime());
 		
 		LoginStatus status = new LoginStatus();
-		status.setIsAdmin(false);
-		status.setIsCoach(false);
 		status.setIsStudent(true);
 		status.setLoggedIn(true);
 		status.setToken(SecurityUtil.authentication(params));

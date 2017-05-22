@@ -834,6 +834,126 @@ public class CoachInfoExample {
             addCriterion("access_time not between", value1, value2, "accessTime");
             return (Criteria) this;
         }
+
+        public Criteria andIsadminIsNull() {
+            addCriterion("isadmin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminIsNotNull() {
+            addCriterion("isadmin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminEqualTo(Short value) {
+            addCriterion("isadmin =", value, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminNotEqualTo(Short value) {
+            addCriterion("isadmin <>", value, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminGreaterThan(Short value) {
+            addCriterion("isadmin >", value, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminGreaterThanOrEqualTo(Short value) {
+            addCriterion("isadmin >=", value, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminLessThan(Short value) {
+            addCriterion("isadmin <", value, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminLessThanOrEqualTo(Short value) {
+            addCriterion("isadmin <=", value, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminIn(List<Short> values) {
+            addCriterion("isadmin in", values, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminNotIn(List<Short> values) {
+            addCriterion("isadmin not in", values, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminBetween(Short value1, Short value2) {
+            addCriterion("isadmin between", value1, value2, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsadminNotBetween(Short value1, Short value2) {
+            addCriterion("isadmin not between", value1, value2, "isadmin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledIsNull() {
+            addCriterion("isapprovaled is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledIsNotNull() {
+            addCriterion("isapprovaled is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledEqualTo(Short value) {
+            addCriterion("isapprovaled =", value, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledNotEqualTo(Short value) {
+            addCriterion("isapprovaled <>", value, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledGreaterThan(Short value) {
+            addCriterion("isapprovaled >", value, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledGreaterThanOrEqualTo(Short value) {
+            addCriterion("isapprovaled >=", value, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledLessThan(Short value) {
+            addCriterion("isapprovaled <", value, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledLessThanOrEqualTo(Short value) {
+            addCriterion("isapprovaled <=", value, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledIn(List<Short> values) {
+            addCriterion("isapprovaled in", values, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledNotIn(List<Short> values) {
+            addCriterion("isapprovaled not in", values, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledBetween(Short value1, Short value2) {
+            addCriterion("isapprovaled between", value1, value2, "isapprovaled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsapprovaledNotBetween(Short value1, Short value2) {
+            addCriterion("isapprovaled not between", value1, value2, "isapprovaled");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

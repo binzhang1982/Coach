@@ -13,6 +13,8 @@
     <result column="stars" property="stars" jdbcType="INTEGER" />
     <result column="introduce" property="introduce" jdbcType="VARCHAR" />
     <result column="access_time" property="accessTime" jdbcType="TIMESTAMP" />
+    <result column="isadmin" property="isadmin" jdbcType="SMALLINT" />
+    <result column="isapprovaled" property="isapprovaled" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     phonenum, name, token, password, level_id, sex_id, email, icon_url, stars, introduce, 
-    access_time
+    access_time, isadmin, isapprovaled
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zbin.coachtalk.busi.entity.CoachInfoExample" >
     select
@@ -110,11 +112,13 @@
     insert into talk.coachinfo (phonenum, name, token, 
       password, level_id, sex_id, 
       email, icon_url, stars, 
-      introduce, access_time)
+      introduce, access_time, isadmin, 
+      isapprovaled)
     values (#{phonenum,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{levelId,jdbcType=INTEGER}, #{sexId,jdbcType=INTEGER}, 
       #{email,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{stars,jdbcType=INTEGER}, 
-      #{introduce,jdbcType=VARCHAR}, #{accessTime,jdbcType=TIMESTAMP})
+      #{introduce,jdbcType=VARCHAR}, #{accessTime,jdbcType=TIMESTAMP}, #{isadmin,jdbcType=SMALLINT}, 
+      #{isapprovaled,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.zbin.coachtalk.busi.entity.CoachInfo" >
     insert into talk.coachinfo
@@ -152,6 +156,12 @@
       <if test="accessTime != null" >
         access_time,
       </if>
+      <if test="isadmin != null" >
+        isadmin,
+      </if>
+      <if test="isapprovaled != null" >
+        isapprovaled,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="phonenum != null" >
@@ -186,6 +196,12 @@
       </if>
       <if test="accessTime != null" >
         #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isadmin != null" >
+        #{isadmin,jdbcType=SMALLINT},
+      </if>
+      <if test="isapprovaled != null" >
+        #{isapprovaled,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -231,6 +247,12 @@
       <if test="record.accessTime != null" >
         access_time = #{record.accessTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.isadmin != null" >
+        isadmin = #{record.isadmin,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isapprovaled != null" >
+        isapprovaled = #{record.isapprovaled,jdbcType=SMALLINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +270,9 @@
       icon_url = #{record.iconUrl,jdbcType=VARCHAR},
       stars = #{record.stars,jdbcType=INTEGER},
       introduce = #{record.introduce,jdbcType=VARCHAR},
-      access_time = #{record.accessTime,jdbcType=TIMESTAMP}
+      access_time = #{record.accessTime,jdbcType=TIMESTAMP},
+      isadmin = #{record.isadmin,jdbcType=SMALLINT},
+      isapprovaled = #{record.isapprovaled,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +310,12 @@
       <if test="accessTime != null" >
         access_time = #{accessTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isadmin != null" >
+        isadmin = #{isadmin,jdbcType=SMALLINT},
+      </if>
+      <if test="isapprovaled != null" >
+        isapprovaled = #{isapprovaled,jdbcType=SMALLINT},
+      </if>
     </set>
     where phonenum = #{phonenum,jdbcType=CHAR}
   </update>
@@ -300,7 +330,9 @@
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       stars = #{stars,jdbcType=INTEGER},
       introduce = #{introduce,jdbcType=VARCHAR},
-      access_time = #{accessTime,jdbcType=TIMESTAMP}
+      access_time = #{accessTime,jdbcType=TIMESTAMP},
+      isadmin = #{isadmin,jdbcType=SMALLINT},
+      isapprovaled = #{isapprovaled,jdbcType=SMALLINT}
     where phonenum = #{phonenum,jdbcType=CHAR}
   </update>
 </mapper>

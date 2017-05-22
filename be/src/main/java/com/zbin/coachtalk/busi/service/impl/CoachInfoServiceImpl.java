@@ -39,6 +39,8 @@ public class CoachInfoServiceImpl implements CoachInfoService {
 		}
 		
 		// 插入数据
+		coach.setIsadmin(new Short("0"));
+		coach.setIsapprovaled(new Short("1"));
 		coachInfoMapper.insert(coach);
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -47,9 +49,7 @@ public class CoachInfoServiceImpl implements CoachInfoService {
 		params.put("access", coach.getAccessTime());
 		
 		LoginStatus status = new LoginStatus();
-		status.setIsAdmin(false);
 		status.setIsCoach(true);
-		status.setIsStudent(false);
 		status.setLoggedIn(true);
 		status.setToken(SecurityUtil.authentication(params));
 		return status;

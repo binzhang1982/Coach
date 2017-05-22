@@ -432,6 +432,13 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
     });
   };
 
+  $scope.schedules = [
+    {workday:"20170522", middayName:"上午",work:true},
+    {workday:"20170522", middayName:"下午",work:true}
+  ]
+  $scope.switchWork = function(schedule) {
+    alert(schedule.middayName);
+  }
   $scope.loadSexParams();
   $scope.loadLevelParams();
 

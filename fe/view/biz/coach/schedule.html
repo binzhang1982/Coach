@@ -1,8 +1,25 @@
 <div class="scrollable">
   <div class="scrollable-content section">
-    我的排班<br>
-    统计信息等<br>
-    本周查看预约信息<br>
-    下周修改排班
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>上班</th>
+          <th>日期</th>
+          <th>上午/下午</th>
+        </tr>
+      </thead>
+      <tbody><tr ng-repeat="schedule in schedules">
+        <td>
+          <!--<button class="btn" ng-click="work(schedule)">-->
+            <!--<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;上班/休息-->
+          <!--</button>-->
+          <a ng-click="switchWork(schedule)">
+            <ui-switch ng-model="schedule.work"></ui-switch>
+          </a>
+        </td>
+        <td>{{ schedule.workday }}</td>
+        <td>{{ schedule.middayName }}</td>
+      </tr></tbody>
+    </table>
   </div>
 </div>

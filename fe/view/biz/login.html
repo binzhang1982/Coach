@@ -3,7 +3,7 @@
 </div>
 -->
 <div class="scrollable">
- <div class="scrollable-content section">
+ <div class="scrollable-content section" ng-controller="LoginController">
 
   <form role="form" ng-submit='login()'>
     <fieldset>
@@ -11,7 +11,7 @@
         <div class="form-group has-success has-feedback">
           <label>手机</label>
           <input type="tel"
-                 ng-model="telephone"
+                 ng-model="loginInfo.telephone"
                  class="form-control"
                  placeholder="Telephone">
         </div>
@@ -19,7 +19,7 @@
         <div class="form-group">
           <label>密码</label>
           <input type="password"
-                 ng-model="password"
+                 ng-model="loginInfo.password"
                  class="form-control"
                  placeholder="Password">
         </div>

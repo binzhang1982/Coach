@@ -358,32 +358,51 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
   var timeout = 10000000;
   var service = {};
 
+  //取选项配置值
   service.getParams = function (groupkey) {
     var url = Url.getParams + "?groupkey=" + groupkey;
 
-    var promise = $http.get(url,{timeout: timeout});
+    var promise = $http.get(url, {timeout: timeout});
     return handleResponse(promise);
   };
 
-  service.saveStudent = function (student) {
+  //登陆
+  service.login = function (data) {
+    var url = Url.login;
+
+    var promise = $http.post(url, data, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //登出
+  service.logout = function () {
+    var url = Url.getParams + "?groupkey=" + groupkey;
+
+    var promise = $http.get(url, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //保存学员
+  service.saveStudent = function (data) {
     var url;
     if ($rootScope.token) {
       url = Url.saveStudent + "?token=" + $rootScope.token;
     } else {
       url = Url.saveStudent;
     }
-    var promise = $http.post(url, student, {timeout: timeout});
+    var promise = $http.post(url, data, {timeout: timeout});
     return handleResponse(promise);
   };
 
-  service.saveCoach = function (coach) {
+  //保存教练
+  service.saveCoach = function (data) {
     var url;
     if ($rootScope.token) {
       url = Url.saveCoach + "?token=" + $rootScope.token;
     } else {
       url = Url.saveCoach;
     }
-    var promise = $http.post(url, coach, {timeout: timeout});
+    var promise = $http.post(url, data, {timeout: timeout});
     return handleResponse(promise);
   }
 
@@ -396,6 +415,10 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
     return {
       //取选项配置值
       getParams: host + path + "/param/list",
+      //登陆
+      login: host + path + "/main/login",
+      //登出
+      logout: host + path + "/main/logout",
       //保存学员
       saveStudent: host + path + "/student/save_student",
       //保存教练
@@ -463,18 +486,16 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
   };
 
   // 控制menu选项
-  $scope.isCoach = false;
-  $scope.isStudent = false;
-  $scope.isAdmin = false;
-  $scope.loggedIn = false;
-  $scope.token;
+  $scope.loginStatus = {
+    isCoach : false,
+    isStudent : false,
+    isAdmin : false,
+    loggedIn : false,
+    token : null
+  };
+
   $scope.$on('changeLoginInfo', function(e,data){
-    console.log(data);
-    $scope.isCoach = data.isCoach;
-    $scope.isStudent = data.isStudent;
-    $scope.isAdmin = data.isAdmin;
-    $scope.loggedIn = data.loggedIn;
-    $scope.token = data.token;
+    $scope.loginStatus = data;
   });
 
   //选项值
@@ -498,10 +519,6 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
     }, function (res) {
       alert(res);
     });
-  };
-
-  $scope.login = function() {
-    alert('You submitted the login form');
   };
 
   $scope.loadSexParams();

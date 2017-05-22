@@ -14,13 +14,7 @@ app.controller('AddUserController', ['$rootScope', '$scope', '$location', 'netRe
         $scope.student.password = '';
         $scope.student.repassword = '';
         $location.path("/studinfo");
-        $scope.$emit("changeLoginInfo", {
-          "isCoach" : false,
-          "isStudent" : true,
-          "isAdmin" : false,
-          "loggedIn" : true,
-          "token" : res
-        });
+        $scope.$emit("changeLoginInfo", res);
       }
     }, function (res) {
       alert(res);
@@ -36,13 +30,7 @@ app.controller('AddUserController', ['$rootScope', '$scope', '$location', 'netRe
         $scope.coach.password = '';
         $scope.coach.repassword = '';
         $location.path("/coachinfo");
-        $scope.$emit("changeLoginInfo", {
-          "isCoach" : true,
-          "isStudent" : false,
-          "isAdmin" : false,
-          "loggedIn" : true,
-          "token" : res
-        });
+        $scope.$emit("changeLoginInfo", res);
       }
     }, function (res) {
       alert(res);

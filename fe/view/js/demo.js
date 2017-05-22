@@ -49,9 +49,9 @@ app.config(function($routeProvider) {
   $routeProvider.when('/studorder', {templateUrl: '../view/biz/student/order.html', reloadOnSearch: true});
   $routeProvider.when('/studlist', {templateUrl: '../view/biz/student/list.html', reloadOnSearch: true});
 
-  $routeProvider.when('/coachlist', {templateUrl: '../view/biz/coach/list.html', reloadOnSearch: true});
   $routeProvider.when('/coachinfo', {templateUrl: '../view/biz/coach/info.html', reloadOnSearch: true});
   $routeProvider.when('/coachschedule', {templateUrl: '../view/biz/coach/schedule.html', reloadOnSearch: true});
+  $routeProvider.when('/coachlist', {templateUrl: '../view/biz/coach/list.html', reloadOnSearch: true});
 
   $routeProvider.when('/adminconfig', {templateUrl: '../view/biz/admin/config.html', reloadOnSearch: true});
 });

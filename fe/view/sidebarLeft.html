@@ -1,6 +1,6 @@
 <div class="scrollable">
   <h1 class="scrollable-header app-name" ng-show="loginStatus.loggedIn">
-    我是<span ng-show="loginStatus.isStudent">学员</span><span ng-show="loginStatus.isCoach">教练</span><span ng-show="loginStatus.isAdmin">管理员</span>
+    我是<span ng-show="loginStatus.isStudent">学员</span><span ng-show="loginStatus.isCoach">教练</span><span ng-show="loginStatus.isAdmin">&管理员</span>
   </h1>
   <div class="scrollable-content">
     <div class="list-group" ui-turn-off="uiSidebarLeft">
@@ -14,13 +14,9 @@
         <!--教练-->
         <a class="list-group-item" href="#/coachinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>
         <a class="list-group-item" href="#/coachschedule">我的排班<i class="fa fa-chevron-right pull-right"></i></a>
-        <a class="list-group-item" href="#/studlist">我的审核<i class="fa fa-chevron-right pull-right"></i></a>
-      </div>
-
-      <div ng-show="loginStatus.isAdmin">
-        <!--管理员-->
-        <a class="list-group-item" href="#/adminconfig">我的配置<i class="fa fa-chevron-right pull-right"></i></a>
-        <a class="list-group-item" href="#/coachlist">我的审核<i class="fa fa-chevron-right pull-right"></i></a>
+        <a class="list-group-item" href="#/studlist">学员审核<i class="fa fa-chevron-right pull-right"></i></a>
+        <a ng-show="loginStatus.isAdmin" class="list-group-item" href="#/coachlist">教练审核<i class="fa fa-chevron-right pull-right"></i></a>
+        <a ng-show="loginStatus.isAdmin" class="list-group-item" href="#/adminconfig">我的配置<i class="fa fa-chevron-right pull-right"></i></a>
       </div>
     </div>
   </div>

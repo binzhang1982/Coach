@@ -8,15 +8,12 @@ app.controller('LoginController', ['$rootScope', '$scope', '$location', 'netRequ
     netRequest.login($scope.loginInfo).then(function (res) {
       if (res != null) {
         $scope.loginInfo.password = '';
-
-        $location.path("/studinfo");
-        $scope.$emit("changeLoginInfo", {
-          "isCoach" : false,
-          "isStudent" : true,
-          "isAdmin" : false,
-          "loggedIn" : true,
-          "token" : res
-        });
+        if (res.isCoach) {
+          $location.path("/coachinfo");
+        } else if (res.isStudent) {
+          $location.path("/studinfo");
+        }
+        $scope.$emit("changeLoginInfo", res);
       }
     }, function (res) {
       alert(res);

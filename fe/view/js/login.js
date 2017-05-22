@@ -5,7 +5,7 @@ app.controller('LoginController', ['$rootScope', '$scope', '$location', 'netRequ
   $scope.loginInfo = {};
 
   $scope.login = function() {
-    netRequest.saveStudent($scope.loginInfo).then(function (res) {
+    netRequest.login($scope.loginInfo).then(function (res) {
       if (res != null) {
         $scope.loginInfo.password = '';
 

@@ -15,7 +15,7 @@
           <!--<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;上班/休息-->
           <!--</button>-->
           <a ng-show="order.canOrder" ng-click="switchOrder(order)">
-            <ui-switch ng-model="order.isOrder" ng-disabled="!order.canOrder"></ui-switch>
+            <ui-switch ng-model="order.hasOrdered" ng-disabled="!order.canOrder"></ui-switch>
           </a>
         </td>
         <td>{{ order.statusName }}</td>

@@ -9,9 +9,9 @@ app.controller('LoginController', ['$rootScope', '$scope', '$location', 'netRequ
       if (res != null) {
         $scope.loginInfo.password = '';
         if (res.isCoach) {
-          $location.path("/coachinfo");
+          $location.path("/coachschedule");
         } else if (res.isStudent) {
-          $location.path("/studinfo");
+          $location.path("/studorder");
         }
         $rootScope.$emit("changeLoginInfo", res);
         $scope.$emit("onLoadUsers", res);

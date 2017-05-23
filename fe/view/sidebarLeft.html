@@ -6,17 +6,17 @@
     <div class="list-group" ui-turn-off="uiSidebarLeft">
       <div ng-show="loginStatus.isStudent">
         <!--学员-->
-        <a class="list-group-item" href="#/studinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>
         <a class="list-group-item" href="#/studorder">我的预约<i class="fa fa-chevron-right pull-right"></i></a>
+        <!--<a class="list-group-item" href="#/studinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>-->
       </div>
 
       <div ng-show="loginStatus.isCoach">
         <!--教练-->
-        <a class="list-group-item" href="#/coachinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>
         <a class="list-group-item" href="#/coachschedule">我的排班<i class="fa fa-chevron-right pull-right"></i></a>
-        <a class="list-group-item" href="#/studlist">学员审核<i class="fa fa-chevron-right pull-right"></i></a>
-        <a ng-show="loginStatus.isAdmin" class="list-group-item" href="#/coachlist">教练审核<i class="fa fa-chevron-right pull-right"></i></a>
-        <a ng-show="loginStatus.isAdmin" class="list-group-item" href="#/adminconfig">我的配置<i class="fa fa-chevron-right pull-right"></i></a>
+        <!--<a class="list-group-item" href="#/coachinfo">我的信息<i class="fa fa-chevron-right pull-right"></i></a>-->
+        <!--<a class="list-group-item" href="#/studlist">学员审核<i class="fa fa-chevron-right pull-right"></i></a>-->
+        <!--<a ng-show="loginStatus.isAdmin" class="list-group-item" href="#/coachlist">教练审核<i class="fa fa-chevron-right pull-right"></i></a>-->
+        <!--<a ng-show="loginStatus.isAdmin" class="list-group-item" href="#/adminconfig">我的配置<i class="fa fa-chevron-right pull-right"></i></a>-->
       </div>
     </div>
   </div>

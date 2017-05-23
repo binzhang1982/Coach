@@ -99,6 +99,20 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
     return handleResponse(promise);
   };
 
+  //取得预约
+  service.getOrder = function () {
+    var url = Url.getOrder + "?token=" + $rootScope.loginStatus.token;
+    var promise = $http.get(url, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //更新预约
+  service.updateOrder = function (data) {
+    var url = Url.updateOrder + "?token=" + $rootScope.loginStatus.token;
+    var promise = $http.post(url, data, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
   //取得排班
   service.getSchedule = function () {
     var url = Url.getSchedule + "?token=" + $rootScope.loginStatus.token;
@@ -106,7 +120,7 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
     return handleResponse(promise);
   };
 
-  //跟新排班
+  //更新排班
   service.updateSchedule = function (data) {
     var url = Url.updateSchedule + "?token=" + $rootScope.loginStatus.token;
     var promise = $http.post(url, data, {timeout: timeout});
@@ -138,9 +152,13 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
       getOwnCoachList: host + path + "/coach/own_list",
       //保存教练
       saveCoach: host + path + "/coach/save_coach",
+      //取得预约
+      getOrder: host + path + "/order/list",
+      //更新预约
+      updateOrder: host + path + "/order/update",
       //取得排班
       getSchedule: host + path + "/schedule/list",
-      //取得排班
+      //更新排班
       updateSchedule: host + path + "/schedule/update"
     };
   }]);

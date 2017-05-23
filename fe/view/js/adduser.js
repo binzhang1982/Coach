@@ -13,7 +13,7 @@ app.controller('AddUserController', ['$rootScope', '$scope', '$location', 'netRe
       if (res != null) {
         $scope.student.password = '';
         $scope.student.repassword = '';
-        $location.path("/studinfo");
+        $location.path("/studorder");
         $rootScope.$emit("changeLoginInfo", res);
       }
     }, function (res) {
@@ -29,7 +29,7 @@ app.controller('AddUserController', ['$rootScope', '$scope', '$location', 'netRe
       if (res != null) {
         $scope.coach.password = '';
         $scope.coach.repassword = '';
-        $location.path("/coachinfo");
+        $location.path("/coachschedule");
         $rootScope.$emit("changeLoginInfo", res);
       }
     }, function (res) {

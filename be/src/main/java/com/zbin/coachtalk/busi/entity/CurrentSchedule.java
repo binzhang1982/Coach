@@ -1,6 +1,7 @@
 package com.zbin.coachtalk.busi.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class CurrentSchedule extends CurrentScheduleKey {
     private Short workFlag;
@@ -12,6 +13,14 @@ public class CurrentSchedule extends CurrentScheduleKey {
     private Boolean isWorked;
     
     private Boolean isEditable;
+    
+    private List<CurrentOrder> orders;
+    
+    private Boolean canOrder;
+    
+    private Boolean hasOrdered;
+    
+    private String statusName;
 
     public Short getWorkFlag() {
         return workFlag;
@@ -51,5 +60,37 @@ public class CurrentSchedule extends CurrentScheduleKey {
 
 	public void setIsEditable(Boolean isEditable) {
 		this.isEditable = isEditable;
+	}
+
+	public List<CurrentOrder> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<CurrentOrder> orders) {
+		this.orders = orders;
+	}
+
+	public Boolean getCanOrder() {
+		return canOrder;
+	}
+
+	public void setCanOrder(Boolean canOrder) {
+		this.canOrder = canOrder;
+	}
+
+	public Boolean getHasOrdered() {
+		return hasOrdered;
+	}
+
+	public void setHasOrdered(Boolean hasOrdered) {
+		this.hasOrdered = hasOrdered;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
 }

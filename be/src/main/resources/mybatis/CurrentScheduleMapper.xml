@@ -221,14 +221,14 @@
   </resultMap>
   <select id="getCoachScheduleList" resultMap="CoachSchedule" parameterType="Map">
 	select
-		coach_phonenum,
-		workday,
-		midday_id,
-		work_flag,
-		update_time,
+		schedule.coach_phonenum as coach_phonenum,
+		schedule.workday as workday,
+		schedule.midday_id as midday_id,
+		schedule.work_flag as work_flag,
+		schedule.update_time as update_time,
 		param.value as midday_name,
 		case 
-			when work_flag = 1 then true
+			when schedule.work_flag = 1 then true
 			else false
 		end as is_worked,
 		true as is_editable
@@ -238,7 +238,49 @@
 			param.id = schedule.midday_id and
 			param.groupkey = 3
   	where 1=1 
-  		<if test="districtId != null">
+  		<if test="CoachPhoneNum != null">
+			and schedule.coach_phonenum = #{CoachPhoneNum}
+		</if>
+	order by schedule.workday, schedule.midday_id
+  </select>
+  
+  <resultMap id="CoachScheduleWithOrder" type="com.zbin.coachtalk.busi.entity.CurrentSchedule" extends="BaseResultMap" >
+    <result column="midday_name" property="middayName" jdbcType="VARCHAR" />
+    <result column="is_worked" property="isWorked" jdbcType="BOOLEAN" />
+    <result column="is_editable" property="isEditable" jdbcType="BOOLEAN" />
+    <collection ofType="com.zbin.coachtalk.busi.entity.CurrentOrder" property="orders" resultMap="StudentOrder" />
+  </resultMap>
+  <resultMap id="StudentOrder" type="com.zbin.coachtalk.busi.entity.CurrentOrder" >
+    <id column="student_phonenum" property="studentPhonenum" jdbcType="CHAR" />
+  </resultMap>
+  <select id="getCoachScheduleListWithOrders" resultMap="CoachScheduleWithOrder" parameterType="Map">
+	select
+		schedule.coach_phonenum as coach_phonenum,
+		schedule.workday as workday,
+		schedule.midday_id as midday_id,
+		schedule.work_flag as work_flag,
+		schedule.update_time as update_time,
+		param.value as midday_name,
+		case 
+			when schedule.work_flag = 1 then true
+			else false
+		end as is_worked,
+		true as is_editable,
+		appoint.student_phonenum as student_phonenum
+	from 
+		talk.currentschedule as schedule
+		left join talk.paraminfo param on
+			param.id = schedule.midday_id and
+			param.groupkey = 3
+		left join talk.currentorder as appoint on
+			appoint.coach_phonenum = schedule.coach_phonenum and
+			appoint.workday = schedule.workday and
+			appoint.midday_id = schedule.midday_id
+  			<if test="StudentPhoneNum != null">
+				and appoint.student_phonenum = #{StudentPhoneNum}
+			</if>
+  	where 1=1 
+  		<if test="CoachPhoneNum != null">
 			and schedule.coach_phonenum = #{CoachPhoneNum}
 		</if>
 	order by schedule.workday, schedule.midday_id

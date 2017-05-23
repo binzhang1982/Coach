@@ -32,4 +32,6 @@ public interface CurrentScheduleMapper {
     int updateByPrimaryKey(CurrentSchedule record);
     
     List<CurrentSchedule> getCoachScheduleList(Map<String, Object> params);
+    
+    List<CurrentSchedule> getCoachScheduleListWithOrders(Map<String, Object> params);
 }

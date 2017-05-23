@@ -20,6 +20,19 @@ public class StudentInfoController {
 
 	@Autowired
 	private StudentService studentService;
+
+    @RequestMapping(value = "own_list", method = {RequestMethod.GET})
+    public @ResponseBody MsgDTO getOwnStudentList(@Param("token") String token) {
+        MsgDTO msgDTO = new MsgDTO();
+        try {
+	        msgDTO.setStatus(MsgDTO.STATUS_OK);
+	        msgDTO.setData(studentService.getOwnStudentList(token));
+	    } catch (Exception e) {
+	    	msgDTO.setStatus(MsgDTO.STATUS_FAIL);
+	    	msgDTO.setMessage(e.getMessage());
+	    }
+        return msgDTO;
+    }
 	
     /**
      * 学员注册或更新
@@ -28,7 +41,7 @@ public class StudentInfoController {
      * @return
      */
     @RequestMapping(value = "save_student", method = {RequestMethod.POST})
-    public @ResponseBody MsgDTO saveDiningDeskMapById(@Param("token") String token, 
+    public @ResponseBody MsgDTO saveStudent(@Param("token") String token, 
     		@RequestBody StudentInfo student) {
         MsgDTO msgDTO = new MsgDTO();
         try {

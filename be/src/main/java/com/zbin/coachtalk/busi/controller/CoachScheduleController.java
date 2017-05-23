@@ -23,7 +23,7 @@ public class CoachScheduleController {
 	private CoachScheduleService coachScheduleService;
 	
     @RequestMapping(value = "list", method = {RequestMethod.GET})
-    public @ResponseBody MsgDTO saveDiningDeskMapById(@Param("token") String token) {
+    public @ResponseBody MsgDTO getScheduleList(@Param("token") String token) {
         MsgDTO msgDTO = new MsgDTO();
         try {
 	        msgDTO.setStatus(MsgDTO.STATUS_OK);
@@ -36,7 +36,7 @@ public class CoachScheduleController {
     }
     
     @RequestMapping(value = "update", method = {RequestMethod.POST})
-    public @ResponseBody MsgDTO saveDiningDeskMapById(@Param("token") String token, 
+    public @ResponseBody MsgDTO updateSchedule(@Param("token") String token, 
     		@RequestBody CurrentSchedule schedule) {
         MsgDTO msgDTO = new MsgDTO();
         try {

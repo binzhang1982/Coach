@@ -1,19 +1,23 @@
 package com.zbin.coachtalk.busi.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zbin.coachtalk.busi.entity.CoachInfo;
+import com.zbin.coachtalk.busi.entity.CoachInfoExample;
 import com.zbin.coachtalk.busi.entity.LoginStatus;
 import com.zbin.coachtalk.busi.mapper.CoachInfoMapper;
 import com.zbin.coachtalk.busi.mapper.StudentInfoMapper;
 import com.zbin.coachtalk.busi.service.CoachInfoService;
 import com.zbin.coachtalk.common.exception.ApplicationException;
 import com.zbin.coachtalk.common.utils.SecurityUtil;
+import com.zbin.coachtalk.common.utils.Utils;
 
 @Service("coachService")
 public class CoachInfoServiceImpl extends BaseServiceImpl implements CoachInfoService {
@@ -26,6 +30,16 @@ public class CoachInfoServiceImpl extends BaseServiceImpl implements CoachInfoSe
     @Autowired
     public CoachInfoMapper coachInfoMapper;
 
+	@Override
+	public List<CoachInfo> getCoachList() {
+		CoachInfoExample coachExam = new CoachInfoExample();
+		List<CoachInfo> coachs = coachInfoMapper.selectByExample(coachExam);
+		if (!Utils.listNotNull(coachs)) {
+			coachs = new ArrayList<CoachInfo>();
+		}
+		return coachs;
+	}
+	
 	@Override
 	public LoginStatus insertCoach(CoachInfo coach) {
 		// 学员电话是否在学员表/教练表存在，存在报错

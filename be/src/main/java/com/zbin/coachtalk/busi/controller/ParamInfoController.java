@@ -26,7 +26,7 @@ public class ParamInfoController {
      * @return
      */
     @RequestMapping(value = "list", method = {RequestMethod.GET})
-    public @ResponseBody MsgDTO saveDiningDeskMapById(@Param("groupkey") Integer groupkey) {
+    public @ResponseBody MsgDTO getParamList(@Param("groupkey") Integer groupkey) {
         MsgDTO msgDTO = new MsgDTO();
         try {
 	        msgDTO.setStatus(MsgDTO.STATUS_OK);

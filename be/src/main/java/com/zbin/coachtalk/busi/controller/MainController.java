@@ -22,7 +22,7 @@ public class MainController {
 	private MainService mainService;
 
     @RequestMapping(value = "login", method = {RequestMethod.POST})
-    public @ResponseBody MsgDTO saveDiningDeskMapById(@RequestBody CoachInfo user) {
+    public @ResponseBody MsgDTO login(@RequestBody CoachInfo user) {
         MsgDTO msgDTO = new MsgDTO();
         try {
 	        msgDTO.setStatus(MsgDTO.STATUS_OK);

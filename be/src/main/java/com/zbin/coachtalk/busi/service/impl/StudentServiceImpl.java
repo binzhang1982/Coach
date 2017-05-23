@@ -1,19 +1,25 @@
 package com.zbin.coachtalk.busi.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zbin.coachtalk.busi.entity.CoachInfo;
+import com.zbin.coachtalk.busi.entity.CoachInfoExample;
 import com.zbin.coachtalk.busi.entity.LoginStatus;
 import com.zbin.coachtalk.busi.entity.StudentInfo;
+import com.zbin.coachtalk.busi.entity.StudentInfoExample;
 import com.zbin.coachtalk.busi.mapper.CoachInfoMapper;
 import com.zbin.coachtalk.busi.mapper.StudentInfoMapper;
 import com.zbin.coachtalk.busi.service.StudentService;
 import com.zbin.coachtalk.common.exception.ApplicationException;
 import com.zbin.coachtalk.common.utils.SecurityUtil;
+import com.zbin.coachtalk.common.utils.Utils;
 
 @Service("studentService")
 public class StudentServiceImpl extends BaseServiceImpl implements StudentService {
@@ -25,6 +31,30 @@ public class StudentServiceImpl extends BaseServiceImpl implements StudentServic
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     public CoachInfoMapper coachInfoMapper;
+
+	@Override
+	public List<StudentInfo> getOwnStudentList(String token) {
+		CoachInfoExample coachExam = new CoachInfoExample();
+		coachExam.createCriteria().andTokenEqualTo(token);
+		List<CoachInfo> coachs = coachInfoMapper.selectByExample(coachExam);
+
+		CoachInfo coach;
+		if (Utils.listNotNull(coachs)) {
+			coach = coachs.get(0);
+		} else {
+			throw new ApplicationException("不是教练员无法排班");
+		}
+		
+		StudentInfoExample studExam = new StudentInfoExample();
+		studExam.createCriteria().andCoachPhonenumEqualTo(coach.getPhonenum());
+		List<StudentInfo> students = studentInfoMapper.selectByExample(studExam);
+		
+		if (!Utils.listNotNull(students)) {
+			students = new ArrayList<StudentInfo>();
+		}
+		
+		return students;
+	}
     
 	@Override
 	public LoginStatus insertStudent(StudentInfo student) {

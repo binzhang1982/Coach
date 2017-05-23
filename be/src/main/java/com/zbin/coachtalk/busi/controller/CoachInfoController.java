@@ -20,6 +20,19 @@ public class CoachInfoController {
 
 	@Autowired
 	private CoachInfoService coachInfoService;
+
+    @RequestMapping(value = "list", method = {RequestMethod.GET})
+    public @ResponseBody MsgDTO getCoachList() {
+        MsgDTO msgDTO = new MsgDTO();
+        try {
+	        msgDTO.setStatus(MsgDTO.STATUS_OK);
+	        msgDTO.setData(coachInfoService.getCoachList());
+	    } catch (Exception e) {
+	    	msgDTO.setStatus(MsgDTO.STATUS_FAIL);
+	    	msgDTO.setMessage(e.getMessage());
+	    }
+        return msgDTO;
+    }
 	
     /**
      * 教练注册或更新
@@ -28,7 +41,7 @@ public class CoachInfoController {
      * @return
      */
     @RequestMapping(value = "save_coach", method = {RequestMethod.POST})
-    public @ResponseBody MsgDTO saveDiningDeskMapById(@Param("token") String token, 
+    public @ResponseBody MsgDTO saveCoach(@Param("token") String token, 
     		@RequestBody CoachInfo coach) {
         MsgDTO msgDTO = new MsgDTO();
         try {

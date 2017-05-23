@@ -445,8 +445,42 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
   //  loggedIn : $window.localStorage.getItem("loggedIn"),
   //  token : $window.localStorage.getItem("token")
   //});
-  $location.path("/login");
 
+  $rootScope.$emit("changeLoginInfo", {
+    isCoach : false,
+    isStudent : false,
+    isAdmin : false,
+    loggedIn : false,
+    token : null
+  });
   $scope.coachs = [];
   $scope.students = [];
+
+  $scope.loadUsers = function() {
+    if ($rootScope.loginStatus.isCoach) {
+      netRequest.getOwnStudentList().then(function (res) {
+        if (res != null) {
+          $scope.students = res;
+        }
+      }, function (res) {
+        alert(res);
+      });
+    } else {
+      netRequest.getCoachList().then(function (res) {
+        if (res != null) {
+          $scope.coachs = res;
+        }
+      }, function (res) {
+        alert(res);
+      });
+    }
+  };
+
+  $scope.loadUsers();
+
+  $scope.$on('onLoadUsers', function(e,data){
+    $scope.loadUsers();
+  });
+
+  $location.path("/login");
 }]);

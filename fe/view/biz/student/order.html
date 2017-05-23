@@ -1,7 +1,27 @@
 <div class="scrollable">
-  <div class="scrollable-content section">
-    我的预约<br>
-    统计信息等
-    本周预约
+  <div class="scrollable-content section" ng-controller="OrderController">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>预约</th>
+        <th>状态</th>
+        <th>日期</th>
+        <th>时间段</th>
+      </tr>
+      </thead>
+      <tbody><tr ng-repeat="order in orders">
+        <td>
+          <!--<button class="btn" ng-click="work(schedule)">-->
+          <!--<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;上班/休息-->
+          <!--</button>-->
+          <a ng-show="order.canOrder" ng-click="switchOrder(order)">
+            <ui-switch ng-model="order.isOrder" ng-disabled="!order.canOrder"></ui-switch>
+          </a>
+        </td>
+        <td>{{ order.statusName }}</td>
+        <td>{{ order.workday | date:"yyyy/MM/dd" }}</td>
+        <td>{{ order.middayName }}</td>
+      </tr></tbody>
+    </table>
   </div>
 </div>

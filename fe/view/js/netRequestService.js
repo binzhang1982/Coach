@@ -47,6 +47,20 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
     return handleResponse(promise);
   };
 
+  //取得学员列表
+  service.getStudentList = function () {
+    var url = Url.getStudentList;
+    var promise = $http.get(url, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //取得自己学员列表
+  service.getOwnStudentList = function () {
+    var url = Url.getOwnStudentList + "?token=" + $rootScope.loginStatus.token;
+    var promise = $http.get(url, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
   //保存学员
   service.saveStudent = function (data) {
     var url;
@@ -56,6 +70,20 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
       url = Url.saveStudent;
     }
     var promise = $http.post(url, data, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //取得教练列表
+  service.getCoachList = function () {
+    var url = Url.getCoachList;
+    var promise = $http.get(url, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //取得自己教练列表
+  service.getOwnCoachList = function () {
+    var url = Url.getOwnCoachList + "?token=" + $rootScope.loginStatus.token;
+    var promise = $http.get(url, {timeout: timeout});
     return handleResponse(promise);
   };
 
@@ -98,8 +126,16 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
       login: host + path + "/main/login",
       //登出
       logout: host + path + "/main/logout",
+      //取得学员列表
+      getStudentList: host + path + "/student/list",
+      //取得自己学员列表
+      getOwnStudentList: host + path + "/student/own_list",
       //保存学员
       saveStudent: host + path + "/student/save_student",
+      //取得教练列表
+      getCoachList: host + path + "/coach/list",
+      //取得自己教练列表
+      getOwnCoachList: host + path + "/coach/own_list",
       //保存教练
       saveCoach: host + path + "/coach/save_coach",
       //取得排班

@@ -13,7 +13,7 @@
           <!--<button class="btn" ng-click="work(schedule)">-->
             <!--<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;上班/休息-->
           <!--</button>-->
-          <a ng-click="switchWork(schedule)">
+          <a ng-show="schedule.isEditable" ng-click="switchWork(schedule)">
             <ui-switch ng-model="schedule.isWorked" ng-disabled="!schedule.isEditable"></ui-switch>
           </a>
         </td>

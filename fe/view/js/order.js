@@ -4,14 +4,16 @@
 app.controller('OrderController', ['$rootScope', '$scope', '$location', 'netRequest', function($rootScope, $scope, $location, netRequest) {
 
   $scope.switchOrder = function(order) {
-    alert(order.hasOrdered);
-    //netRequest.updateSchedule(schedule).then(function (res) {
-    //  if (res != null) {
-    //    $scope.schedules = res;
-    //  }
-    //}, function (res) {
-    //  alert(res);
-    //});
+    if (order.canOrder){
+      netRequest.updateOrder(order).then(function (res) {
+        if (res != null) {
+          $scope.orders = res;
+        }
+      }, function (res) {
+        alert(res);
+        $scope.getOrders();
+      });
+    }
   }
 
   $scope.getOrders =function() {

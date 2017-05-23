@@ -13,10 +13,18 @@ app.controller('LoginController', ['$rootScope', '$scope', '$location', 'netRequ
         } else if (res.isStudent) {
           $location.path("/studinfo");
         }
-        $scope.$emit("changeLoginInfo", res);
+        $rootScope.$emit("changeLoginInfo", res);
       }
     }, function (res) {
       alert(res);
     });
   };
+
+  $rootScope.$emit("changeLoginInfo", {
+    isCoach : false,
+    isStudent : false,
+    isAdmin : false,
+    loggedIn : false,
+    token : null
+  });
 }]);

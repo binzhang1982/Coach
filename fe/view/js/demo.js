@@ -43,6 +43,7 @@ app.config(function($routeProvider) {
   $routeProvider.when('/carousel', {templateUrl: '../carousel.html', reloadOnSearch: false});
 
   $routeProvider.when('/', {templateUrl: '../view/biz/login.html', reloadOnSearch: true});
+  $routeProvider.when('/login', {templateUrl: '../view/biz/login.html', reloadOnSearch: true});
   $routeProvider.when('/adduser', {templateUrl: '../view/biz/adduser.html', reloadOnSearch: true});
 
   $routeProvider.when('/studinfo', {templateUrl: '../view/biz/student/info.html', reloadOnSearch: true});
@@ -397,16 +398,19 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
   };
 
   // 控制menu选项
-  $scope.loginStatus = {
-    isCoach : false,
-    isStudent : false,
-    isAdmin : false,
-    loggedIn : false,
-    token : null
-  };
-
-  $scope.$on('changeLoginInfo', function(e,data){
-    $scope.loginStatus = data;
+  $rootScope.$on('changeLoginInfo', function(e,data){
+    $rootScope.loginStatus = data;
+    //$window.localStorage.removeItem("isCoach");
+    //$window.localStorage.removeItem("isStudent");
+    //$window.localStorage.removeItem("isAdmin");
+    //$window.localStorage.removeItem("loggedIn");
+    //$window.localStorage.removeItem("token");
+    //$window.localStorage.setItem("isCoach",data.isCoach);
+    //$window.localStorage.setItem("isStudent",data.isStudent);
+    //$window.localStorage.setItem("isAdmin",data.isAdmin);
+    //$window.localStorage.setItem("loggedIn",data.loggedIn);
+    //$window.localStorage.setItem("token",data.token);
+    //$rootScope.$apply();
   });
 
   //选项值
@@ -432,15 +436,16 @@ app.controller('MainController', ['$rootScope', '$scope', '$location', 'netReque
     });
   };
 
-  $scope.schedules = [
-    {workday:"20170522", middayName:"上午",work:true},
-    {workday:"20170522", middayName:"下午",work:true}
-  ]
-  $scope.switchWork = function(schedule) {
-    alert(schedule.middayName);
-  }
   $scope.loadSexParams();
   $scope.loadLevelParams();
+  //$rootScope.$emit("changeLoginInfo", {
+  //  isCoach : $window.localStorage.getItem("isCoach"),
+  //  isStudent : $window.localStorage.getItem("isStudent"),
+  //  isAdmin : $window.localStorage.getItem("isAdmin"),
+  //  loggedIn : $window.localStorage.getItem("loggedIn"),
+  //  token : $window.localStorage.getItem("token")
+  //});
+  $location.path("/login");
 
   $scope.coachs = [];
   $scope.students = [];

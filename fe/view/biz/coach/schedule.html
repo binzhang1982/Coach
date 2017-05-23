@@ -1,11 +1,11 @@
 <div class="scrollable">
-  <div class="scrollable-content section">
+  <div class="scrollable-content section" ng-controller="ScheduleController">
     <table class="table table-striped">
       <thead>
         <tr>
           <th>上班</th>
           <th>日期</th>
-          <th>上午/下午</th>
+          <th>时间段</th>
         </tr>
       </thead>
       <tbody><tr ng-repeat="schedule in schedules">
@@ -14,10 +14,10 @@
             <!--<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;上班/休息-->
           <!--</button>-->
           <a ng-click="switchWork(schedule)">
-            <ui-switch ng-model="schedule.work"></ui-switch>
+            <ui-switch ng-model="schedule.isWorked" ng-disabled="!schedule.isEditable"></ui-switch>
           </a>
         </td>
-        <td>{{ schedule.workday }}</td>
+        <td>{{ schedule.workday | date:"yyyy/MM/dd" }}</td>
         <td>{{ schedule.middayName }}</td>
       </tr></tbody>
     </table>

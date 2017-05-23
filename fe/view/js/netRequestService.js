@@ -50,8 +50,8 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
   //保存学员
   service.saveStudent = function (data) {
     var url;
-    if ($rootScope.token) {
-      url = Url.saveStudent + "?token=" + $rootScope.token;
+    if ($rootScope.loginStatus.token) {
+      url = Url.saveStudent + "?token=" + $rootScope.loginStatus.token;
     } else {
       url = Url.saveStudent;
     }
@@ -62,14 +62,28 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
   //保存教练
   service.saveCoach = function (data) {
     var url;
-    if ($rootScope.token) {
-      url = Url.saveCoach + "?token=" + $rootScope.token;
+    if ($rootScope.loginStatus.token) {
+      url = Url.saveCoach + "?token=" + $rootScope.loginStatus.token;
     } else {
       url = Url.saveCoach;
     }
     var promise = $http.post(url, data, {timeout: timeout});
     return handleResponse(promise);
-  }
+  };
+
+  //取得排班
+  service.getSchedule = function () {
+    var url = Url.getSchedule + "?token=" + $rootScope.loginStatus.token;
+    var promise = $http.get(url, {timeout: timeout});
+    return handleResponse(promise);
+  };
+
+  //跟新排班
+  service.updateSchedule = function (data) {
+    var url = Url.updateSchedule + "?token=" + $rootScope.loginStatus.token;
+    var promise = $http.post(url, data, {timeout: timeout});
+    return handleResponse(promise);
+  };
 
   return service;
 
@@ -87,6 +101,10 @@ app.factory('netRequest', ['$q', '$http', 'Url', "$rootScope", function ($q, $ht
       //保存学员
       saveStudent: host + path + "/student/save_student",
       //保存教练
-      saveCoach: host + path + "/coach/save_coach"
+      saveCoach: host + path + "/coach/save_coach",
+      //取得排班
+      getSchedule: host + path + "/schedule/list",
+      //取得排班
+      updateSchedule: host + path + "/schedule/update"
     };
   }]);

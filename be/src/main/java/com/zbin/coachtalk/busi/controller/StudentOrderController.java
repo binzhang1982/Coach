@@ -4,11 +4,13 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zbin.coachtalk.busi.dto.MsgDTO;
+import com.zbin.coachtalk.busi.entity.CurrentSchedule;
 import com.zbin.coachtalk.busi.service.StudentOrderService;
 
 @CrossOrigin(maxAge = 3600)
@@ -24,6 +26,21 @@ public class StudentOrderController {
         MsgDTO msgDTO = new MsgDTO();
         try {
 	        msgDTO.setStatus(MsgDTO.STATUS_OK);
+	        msgDTO.setData(studentOrderService.getOrderList(token));
+	    } catch (Exception e) {
+	    	msgDTO.setStatus(MsgDTO.STATUS_FAIL);
+	    	msgDTO.setMessage(e.getMessage());
+	    }
+        return msgDTO;
+    }
+    
+    @RequestMapping(value = "update", method = {RequestMethod.POST})
+    public @ResponseBody MsgDTO updateSchedule(@Param("token") String token, 
+    		@RequestBody CurrentSchedule order) {
+        MsgDTO msgDTO = new MsgDTO();
+        try {
+	        msgDTO.setStatus(MsgDTO.STATUS_OK);
+	        studentOrderService.updateOrder(token, order);
 	        msgDTO.setData(studentOrderService.getOrderList(token));
 	    } catch (Exception e) {
 	    	msgDTO.setStatus(MsgDTO.STATUS_FAIL);

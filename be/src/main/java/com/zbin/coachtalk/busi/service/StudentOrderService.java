@@ -6,4 +6,6 @@ import com.zbin.coachtalk.busi.entity.CurrentSchedule;
 
 public interface StudentOrderService {
 	List<CurrentSchedule> getOrderList(String token);
+	
+	void updateOrder(String token, CurrentSchedule order);
 }

@@ -4,6 +4,8 @@ import com.zbin.coachtalk.busi.entity.CurrentSchedule;
 import com.zbin.coachtalk.busi.entity.CurrentScheduleExample;
 import com.zbin.coachtalk.busi.entity.CurrentScheduleKey;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CurrentScheduleMapper {
@@ -28,4 +30,6 @@ public interface CurrentScheduleMapper {
     int updateByPrimaryKeySelective(CurrentSchedule record);
 
     int updateByPrimaryKey(CurrentSchedule record);
+    
+    List<CurrentSchedule> getCoachScheduleList(Map<String, Object> params);
 }

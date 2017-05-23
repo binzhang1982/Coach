@@ -21,7 +21,7 @@ import com.zbin.coachtalk.common.utils.SecurityUtil;
 import com.zbin.coachtalk.common.utils.Utils;
 
 @Service("mainService")
-public class MainServiceImpl implements MainService {
+public class MainServiceImpl extends BaseServiceImpl implements MainService {
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
@@ -42,16 +42,13 @@ public class MainServiceImpl implements MainService {
 			StudentInfo stud = studs.get(0);
 			// 更新AccessTime
 			stud.setAccessTime(new Date());
+			stud.setToken(super.getToken(stud.getPhonenum(), 
+					stud.getPassword(), stud.getAccessTime()));
 			studentInfoMapper.updateByPrimaryKey(stud);
-
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("phonenum", stud.getPhonenum());
-			params.put("password", stud.getPassword());
-			params.put("access", stud.getAccessTime());
 			
 			status.setIsStudent(true);
 			status.setLoggedIn(true);
-			status.setToken(SecurityUtil.authentication(params));
+			status.setToken(stud.getToken());
 		} else {
 			CoachInfoExample coachExam = new CoachInfoExample();
 			coachExam.createCriteria().andPhonenumEqualTo(user.getPhonenum())
@@ -61,19 +58,16 @@ public class MainServiceImpl implements MainService {
 				CoachInfo coach = coachs.get(0);
 				// 更新AccessTime
 				coach.setAccessTime(new Date());
+				coach.setToken(super.getToken(coach.getPhonenum(), 
+						coach.getPassword(), coach.getAccessTime()));
 				coachInfoMapper.updateByPrimaryKey(coach);
-				
-				Map<String, Object> params = new HashMap<String, Object>();
-				params.put("phonenum", coach.getPhonenum());
-				params.put("password", coach.getPassword());
-				params.put("access", coach.getAccessTime());
 				
 				if (coach.getIsadmin().equals(new Short("1"))) {
 					status.setIsAdmin(true);
 				}
 				status.setIsCoach(true);
 				status.setLoggedIn(true);
-				status.setToken(SecurityUtil.authentication(params));
+				status.setToken(coach.getToken());
 			} else {
 				throw new ApplicationException("未注册用户无法登陆!");
 			}

@@ -12,6 +12,7 @@
     <result column="coach_phonenum" property="coachPhonenum" jdbcType="CHAR" />
     <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
     <result column="access_time" property="accessTime" jdbcType="TIMESTAMP" />
+    <result column="isapprovaled" property="isapprovaled" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List" >
     phonenum, name, token, password, level_id, sex_id, email, coach_phonenum, icon_url, 
-    access_time
+    access_time, isapprovaled
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zbin.coachtalk.busi.entity.StudentInfoExample" >
     select
@@ -109,11 +110,11 @@
     insert into talk.studentinfo (phonenum, name, token, 
       password, level_id, sex_id, 
       email, coach_phonenum, icon_url, 
-      access_time)
+      access_time, isapprovaled)
     values (#{phonenum,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{levelId,jdbcType=INTEGER}, #{sexId,jdbcType=INTEGER}, 
       #{email,jdbcType=VARCHAR}, #{coachPhonenum,jdbcType=CHAR}, #{iconUrl,jdbcType=VARCHAR}, 
-      #{accessTime,jdbcType=TIMESTAMP})
+      #{accessTime,jdbcType=TIMESTAMP}, #{isapprovaled,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="com.zbin.coachtalk.busi.entity.StudentInfo" >
     insert into talk.studentinfo
@@ -148,6 +149,9 @@
       <if test="accessTime != null" >
         access_time,
       </if>
+      <if test="isapprovaled != null" >
+        isapprovaled,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="phonenum != null" >
@@ -179,6 +183,9 @@
       </if>
       <if test="accessTime != null" >
         #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isapprovaled != null" >
+        #{isapprovaled,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -221,6 +228,9 @@
       <if test="record.accessTime != null" >
         access_time = #{record.accessTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.isapprovaled != null" >
+        isapprovaled = #{record.isapprovaled,jdbcType=SMALLINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,7 +247,8 @@
       email = #{record.email,jdbcType=VARCHAR},
       coach_phonenum = #{record.coachPhonenum,jdbcType=CHAR},
       icon_url = #{record.iconUrl,jdbcType=VARCHAR},
-      access_time = #{record.accessTime,jdbcType=TIMESTAMP}
+      access_time = #{record.accessTime,jdbcType=TIMESTAMP},
+      isapprovaled = #{record.isapprovaled,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +283,9 @@
       <if test="accessTime != null" >
         access_time = #{accessTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isapprovaled != null" >
+        isapprovaled = #{isapprovaled,jdbcType=SMALLINT},
+      </if>
     </set>
     where phonenum = #{phonenum,jdbcType=CHAR}
   </update>
@@ -285,7 +299,8 @@
       email = #{email,jdbcType=VARCHAR},
       coach_phonenum = #{coachPhonenum,jdbcType=CHAR},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
-      access_time = #{accessTime,jdbcType=TIMESTAMP}
+      access_time = #{accessTime,jdbcType=TIMESTAMP},
+      isapprovaled = #{isapprovaled,jdbcType=SMALLINT}
     where phonenum = #{phonenum,jdbcType=CHAR}
   </update>
 </mapper>

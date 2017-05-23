@@ -16,7 +16,7 @@ import com.zbin.coachtalk.common.exception.ApplicationException;
 import com.zbin.coachtalk.common.utils.SecurityUtil;
 
 @Service("coachService")
-public class CoachInfoServiceImpl implements CoachInfoService {
+public class CoachInfoServiceImpl extends BaseServiceImpl implements CoachInfoService {
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
@@ -28,8 +28,6 @@ public class CoachInfoServiceImpl implements CoachInfoService {
 
 	@Override
 	public LoginStatus insertCoach(CoachInfo coach) {
-		coach.setAccessTime(new Date());
-
 		// 学员电话是否在学员表/教练表存在，存在报错
 		if (studentInfoMapper.selectByPrimaryKey(coach.getPhonenum()) != null) {
 			throw new ApplicationException("电话号码已经被注册了");
@@ -39,19 +37,17 @@ public class CoachInfoServiceImpl implements CoachInfoService {
 		}
 		
 		// 插入数据
+		coach.setAccessTime(new Date());
+		coach.setToken(super.getToken(coach.getPhonenum(), 
+				coach.getPassword(), coach.getAccessTime()));
 		coach.setIsadmin(new Short("0"));
 		coach.setIsapprovaled(new Short("1"));
 		coachInfoMapper.insert(coach);
-
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("phonenum", coach.getPhonenum());
-		params.put("password", coach.getPassword());
-		params.put("access", coach.getAccessTime());
 		
 		LoginStatus status = new LoginStatus();
 		status.setIsCoach(true);
 		status.setLoggedIn(true);
-		status.setToken(SecurityUtil.authentication(params));
+		status.setToken(coach.getToken());
 		return status;
 	}
 }

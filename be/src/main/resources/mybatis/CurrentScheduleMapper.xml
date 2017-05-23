@@ -208,4 +208,39 @@
       and workday = #{workday,jdbcType=DATE}
       and midday_id = #{middayId,jdbcType=SMALLINT}
   </update>
+  
+  
+  
+  
+  
+    
+  <resultMap id="CoachSchedule" type="com.zbin.coachtalk.busi.entity.CurrentSchedule" extends="BaseResultMap" >
+    <result column="midday_name" property="middayName" jdbcType="VARCHAR" />
+    <result column="is_worked" property="isWorked" jdbcType="BOOLEAN" />
+    <result column="is_editable" property="isEditable" jdbcType="BOOLEAN" />
+  </resultMap>
+  <select id="getCoachScheduleList" resultMap="CoachSchedule" parameterType="Map">
+	select
+		coach_phonenum,
+		workday,
+		midday_id,
+		work_flag,
+		update_time,
+		param.value as midday_name,
+		case 
+			when work_flag = 1 then true
+			else false
+		end as is_worked,
+		true as is_editable
+	from 
+		talk.currentschedule as schedule
+		left join talk.paraminfo param on
+			param.id = schedule.midday_id and
+			param.groupkey = 3
+  	where 1=1 
+  		<if test="districtId != null">
+			and schedule.coach_phonenum = #{CoachPhoneNum}
+		</if>
+	order by schedule.workday, schedule.midday_id
+  </select>
 </mapper>

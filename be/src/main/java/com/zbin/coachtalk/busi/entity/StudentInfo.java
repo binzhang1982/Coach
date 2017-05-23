@@ -23,6 +23,8 @@ public class StudentInfo {
 
     private Date accessTime;
 
+    private Short isapprovaled;
+
     public String getPhonenum() {
         return phonenum;
     }
@@ -101,5 +103,13 @@ public class StudentInfo {
 
     public void setAccessTime(Date accessTime) {
         this.accessTime = accessTime;
+    }
+
+    public Short getIsapprovaled() {
+        return isapprovaled;
+    }
+
+    public void setIsapprovaled(Short isapprovaled) {
+        this.isapprovaled = isapprovaled;
     }
 }

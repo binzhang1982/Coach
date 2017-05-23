@@ -20,7 +20,7 @@ public class ParamInfoController {
 	private ParamInfoService paramInfoService;
 	
     /**
-     * 学员注册或更新
+     * 取得配置
      * @param id
      * @param maps
      * @return

@@ -13,7 +13,7 @@ import com.zbin.coachtalk.busi.service.ParamInfoService;
 import com.zbin.coachtalk.common.utils.Utils;
 
 @Service("paramService")
-public class ParamInfoServiceImpl implements ParamInfoService {
+public class ParamInfoServiceImpl extends BaseServiceImpl implements ParamInfoService {
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired

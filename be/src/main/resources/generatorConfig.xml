@@ -42,9 +42,6 @@
 			<property name="exampleMethodVisibility" value="public" />
 		</javaClientGenerator>
 		<!-- 
-		<table schema="talk" tableName="studentinfo" domainObjectName="StudentInfo">
-			<property name="useActualColumnNames" value="false"/>
-		</table>
 		<table schema="talk" tableName="currentorder" domainObjectName="CurrentOrder">
 			<property name="useActualColumnNames" value="false"/>
 		</table>
@@ -60,8 +57,11 @@
 		<table schema="talk" tableName="paraminfo" domainObjectName="ParamInfo">
 			<property name="useActualColumnNames" value="false"/>
 		</table>
-		 -->
 		<table schema="talk" tableName="coachinfo" domainObjectName="CoachInfo">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		 -->
+		<table schema="talk" tableName="studentinfo" domainObjectName="StudentInfo">
 			<property name="useActualColumnNames" value="false"/>
 		</table>
 	</context>
